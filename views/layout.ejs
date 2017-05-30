@@ -29,14 +29,8 @@
     -->
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
     <link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/core.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/components.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/icons.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/pages.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/menu.css" rel="stylesheet" type="text/css" />
-        <link href="/styles/responsive.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
 
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -55,13 +49,18 @@
         'app':                        'app', // 'dist',
         '@angular':                   'node_modules/@angular',
         'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-        'rxjs':                       'node_modules/rxjs'
+        'rxjs':                       'node_modules/rxjs',
+        'moment': 'node_modules/moment',
+        'ngx-bootstrap':              'node_modules/ngx-bootstrap',
       };
       // packages tells the System loader how to load when no filename and/or no extension
       var packages = {
         'app':                        { main: 'main.js',  defaultExtension: 'js' },
         'rxjs':                       { defaultExtension: 'js' },
         'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+
+        'ngx-bootstrap':              { format: 'cjs', main: 'bundles/ngx-bootstrap.umd.js', defaultExtension: 'js' },
+        'moment':                     { main: 'moment.js', defaultExtension: 'js' },
       };
       var ngPackageNames = [
         'common',
