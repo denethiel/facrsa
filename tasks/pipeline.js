@@ -18,6 +18,7 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'styles/bootstrap.min.css',
+  'styles/ripple.min.css',
   'assets/styles/importer.less'
 ];
 

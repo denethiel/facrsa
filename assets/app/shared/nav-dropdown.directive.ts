@@ -1,4 +1,4 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
     selector:'.nav-dropdown',
@@ -28,54 +28,18 @@ export class NavDropdownDirective{
     }
 }
 
-
-
-
-@Directive({
-    selector:'.nav-dropdown-items',
-    host:{
-        '[style.display]':'_display',
-    }
-})
-export class NavDropdownItems{
-    private _display = 'none';
-    isDisplay() { 
-        if(this._display = 'none'){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    show() {
-        this._display = 'block';
-    }
-
-    hide() {
-        this._display = 'none';
-    }
-
-    toggle() {
-        if(this.isDisplay()) {
-            this.hide();
-        }else{
-            this.show();
-        }
-    }
-}
-
 @Directive({
     selector:'.nav-dropdown-toggle',
 })
 export class NavDropdownToggleDirective {
-    constructor(private dropdown: NavDropdownDirective, private dropdownitems: NavDropdownItems) {}
+    constructor(private dropdown: NavDropdownDirective) {}
 
     @HostListener('click',['$event'])
     toggleOpen($event: any){
         $event.preventDefault();
         this.dropdown.toggle();
-        this.dropdownitems.toggle();
+        //this.navItems.toggle();
     }
 }
 
-export const NAV_DROPDOWN_DIRECTIVES = [NavDropdownDirective, NavDropdownToggleDirective, NavDropdownItems];
+export const NAV_DROPDOWN_DIRECTIVES = [NavDropdownDirective, NavDropdownToggleDirective];
