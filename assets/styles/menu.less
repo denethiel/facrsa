@@ -283,7 +283,16 @@ File: Menu
 }
 
 .sidebar-inner {
-  height: @height;
+  //height: @height;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  &::-webkit-scrollbar{
+    position: absolute;
+    width: 10px;
+    margin-left: -10px;
+    -webkit-appearance: none;
+  }
 }
 
 #sidebar-menu, #sidebar-menu ul, #sidebar-menu li, #sidebar-menu a {
@@ -295,6 +304,7 @@ File: Menu
   padding: 0;
   position: relative;
   text-decoration: none;
+  
 }
 
 #sidebar-menu {
@@ -306,7 +316,16 @@ File: Menu
   }
 
   ul {
-    li {
+    li { //Menu Item
+      &.open {
+        > ul, > ol {
+          max-height: 1000px;
+        }
+        > .menu-arrow {
+          -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+        }
+      }
       .menu-arrow {
         -webkit-transition: -webkit-transform .15s;
         -o-transition: -o-transform .15s;
@@ -337,7 +356,12 @@ File: Menu
       }
     }
     ul {
-      display: none;
+      //display: none;
+      max-height: 0;
+      padding: 0;
+      margin: 0;
+      overflow-y: hidden;
+      transition: max-height .3 ease-in-out;
       li {
         border-top: 0;
       }
