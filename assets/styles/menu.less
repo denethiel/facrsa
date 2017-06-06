@@ -281,18 +281,36 @@ File: Menu
     color: @custom;
   }
 }
+@sidebar-bg : #ebeff2;
+@navbar-height: 60px;
 
 .sidebar-inner {
-  //height: @height;
+  height: ~"calc(100vh - 60px)";
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+  
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  &::-webkit-scrollbar{
+
+  &:-webkit-scrollbar{
     position: absolute;
     width: 10px;
     margin-left: -10px;
     -webkit-appearance: none;
   }
+  &:-webkit-scrollbar-track {
+      background-color: lighten(@sidebar-bg, 5%);
+      border-right: 1px solid darken(@sidebar-bg, 5%);
+      border-left: 1px solid darken(@sidebar-bg, 5%);
+    }
+  &:-webkit-scrollbar-thumb {
+      height: 50px;
+      background-color: darken(@sidebar-bg, 10%);
+      background-clip: content-box;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 1px 2px;
+    }
 }
 
 #sidebar-menu, #sidebar-menu ul, #sidebar-menu li, #sidebar-menu a {
@@ -316,16 +334,12 @@ File: Menu
   }
 
   ul {
+    overflow:auto;
+
     li { //Menu Item
-      &.open {
-        > ul, > ol {
-          max-height: 1000px;
-        }
-        > .menu-arrow {
-          -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-        }
-      }
+
+
+     
       .menu-arrow {
         -webkit-transition: -webkit-transform .15s;
         -o-transition: -o-transform .15s;
@@ -348,6 +362,15 @@ File: Menu
           content: '\f2fb';
         }
       }
+       &.open {
+        > ul, > ol {
+          max-height: 1000px;
+        }
+        > a span.menu-arrow {
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+        }
+      }
       a.subdrop .menu-arrow {
         -ms-transform: rotate(90deg);
         -webkit-transform: rotate(90deg);
@@ -361,7 +384,7 @@ File: Menu
       padding: 0;
       margin: 0;
       overflow-y: hidden;
-      transition: max-height .3 ease-in-out;
+      transition: max-height .3s ease-in-out;
       li {
         border-top: 0;
       }
