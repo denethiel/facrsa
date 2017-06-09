@@ -4,8 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 //Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 
-import { DashboardModule } from './dashboard/dashboard.module';
-
 export const routes: Routes = [
     {
         path: '',
@@ -21,7 +19,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: DashboardModule
+                loadChildren: './app/dashboard/dashboard.module#DashboardModule'
             }
         ]
     }
