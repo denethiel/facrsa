@@ -2,6 +2,12 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 import { AppComponent }   from './app.component';
 import { ModalModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -20,6 +26,8 @@ import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
     imports:[
         BrowserModule,
         //BrowserAnimationsModule,
+        FormsModule,
+        HttpModule,
         AppRoutingModule, 
         ModalModule.forRoot(), 
         BsDropdownModule.forRoot()],
@@ -32,7 +40,10 @@ import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
     providers: [{
         provide: LocationStrategy,
         useClass: HashLocationStrategy
-    }],
+    },
+    AUTH_PROVIDERS,
+    AuthService,
+    AuthGuard],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

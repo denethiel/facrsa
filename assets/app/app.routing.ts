@@ -4,6 +4,7 @@ import {AuthGuard} from './auth/auth-guard.service';
 
 //Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
+import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 export const routes: Routes = [
     {
@@ -21,7 +22,20 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: './app/dashboard/dashboard.module#DashboardModule',
-                //canActivate:[AuthGuard]
+                canActivate:[AuthGuard]
+            }
+        ]
+    },
+    {
+        path: 'pages',
+        component: SimpleLayoutComponent,
+        data:{
+            title: 'Pages'
+        },
+        children: [
+            {
+                path: '',
+                loadChildren:'./app/pages/pages.module#PagesModule',
             }
         ]
     }
