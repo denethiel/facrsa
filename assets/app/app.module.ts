@@ -3,7 +3,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthService } from './auth/auth.service';
@@ -27,6 +27,7 @@ import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
         BrowserModule,
         //BrowserAnimationsModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         AppRoutingModule, 
         ModalModule.forRoot(), 
