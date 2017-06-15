@@ -10,23 +10,17 @@
                     <h4 class="text-uppercase font-bold m-b-0">Iniciar Sesion</h4>
                 </div>
                 <div class="panel-body">
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-horizontal m-t-20" >
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-horizontal m-t-20"   >
 
-                        <div class="form-group" [class.error]="!loginForm.get('email').valid && loginForm.get('email').touched">
+                        <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" placeholder="Correo Electronico" [formControl]="loginForm.controls['email']">
-                                <ul class="parsley-errors-list filled" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
-                                    <li class="parslet-required" *ngIf="loginForm.constrols['email'].hasError('required')">Correo Electronico Requerido</li>
-                                </ul>
+                                <input class="form-control" type="text" placeholder="Correo Electronico" formControlName="email" required>
                             </div>
                         </div>
 
-                        <div class="form-group" [class.error]="!loginForm.get('password').valid && loginForm.get('password').touched">
+                        <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Contraseña" [formControl]="loginForm.constrols['password']">
-                                <ul class="parsley-errors-list filled" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
-                                    <li class="parslet-required" *ngIf="loginForm.constrols['password'].hasError('required')">Contraseña Requerida</li>
-                                </ul>
+                                <input class="form-control" type="password" required="" placeholder="Contraseña" formControlName="password">
                             </div>
                         </div>
 

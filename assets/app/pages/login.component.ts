@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder,
          FormGroup,
          Validators} from '@angular/forms';
@@ -6,16 +6,27 @@ import { FormBuilder,
 @Component({
     templateUrl:'app/pages/login.component.html'
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
+
     loginForm: FormGroup;
-    constructor(fb: FormBuilder) {
-        this.loginForm = fb.group({
-            'email':['', Validators.compose([Validators.required, Validators.email]) ],
-            'password':['',Validators.required]
-        })
+
+    constructor(private fb: FormBuilder) {
+     }
+
+
+
+     createForm():void{
+         this.loginForm = this.fb.group({
+             'email': [''],
+             'password':['']
+         });
+     }
+
+     ngOnInit(): void{
+         this.createForm();
      }
      
-     onsubmit(value:any):void{
+     onSubmit(value:any):void{
          console.log('you submitted value:' , value);
      }
 }

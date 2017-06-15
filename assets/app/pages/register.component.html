@@ -10,23 +10,23 @@
                     <h4 class="text-uppercase font-bold m-b-0">Registro</h4>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal m-t-20" action="index.html">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form-horizontal m-t-20" action="index.html">
 
 						<div class="form-group ">
 							<div class="col-xs-12">
-								<input class="form-control" type="email" required="" placeholder="Correo Electronico">
+								<input class="form-control" type="email" required="" formControlName="email" placeholder="Correo Electronico">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-xs-12">
-								<input class="form-control" type="password" required="" placeholder="Contraseña">
+								<input class="form-control" type="password" formControlName="password" placeholder="Contraseña">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-xs-12">
-								<input class="form-control" type="password" required="" placeholder="Verificar Contraseña">
+								<input class="form-control" type="password" required="" formControlName="requiredPassword" placeholder="Verificar Contraseña">
 							</div>
 						</div>
 
