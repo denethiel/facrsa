@@ -12,21 +12,33 @@
                 <div class="panel-body">
                     <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form-horizontal m-t-20" action="index.html">
 
-						<div class="form-group ">
+						<div class="form-group" [class.form-error]="!email.valid && email.touched">
 							<div class="col-xs-12">
 								<input class="form-control" type="email" required="" formControlName="email" placeholder="Correo Electronico">
+								<ul class="form-error-list">
+									<li *ngIf="!email.valid">Email Invalido</li>
+									<li *ngIf="email.hasError('required')">Correo Electronico Requerido</li>
+								</ul>
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" [class.form-error]="!password.valid && password.touched">
 							<div class="col-xs-12">
 								<input class="form-control" type="password" formControlName="password" placeholder="Contraseña">
+								<ul class="form-error-list">
+									<li *ngIf="!password.valid">Contraseña Invalida</li>
+									<li *ngIf="password.hasError('required')">Contraseña Requerida</li>
+								</ul>
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" [class.form-error]="!confirmPassword.valid && confirmPassword.touched">
 							<div class="col-xs-12">
-								<input class="form-control" type="password" required="" formControlName="requiredPassword" placeholder="Verificar Contraseña">
+								<input class="form-control" type="password" required="" formControlName="confirmPassword" placeholder="Verificar Contraseña">
+								<ul class="form-error-list">
+									<li *ngIf="!confirmPassword.valid">Contraseña Invalida</li>
+									<li *ngIf="confirmPassword.hasError('required')">Contraseña Requerida</li>
+								</ul>
 							</div>
 						</div>
 
@@ -55,7 +67,7 @@
 
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<p class="text-muted">¿Posee una cuenta?<a href="page-login.html" class="text-primary m-l-5"><b>Iniciar Sesion</b></a></p>
+					<p class="text-muted">¿Posee una cuenta?<a class="text-primary m-l-5" [routerLink]="['pages/login']"><b>Iniciar Sesion</b></a></p>
 				</div>
 			</div>
 

@@ -32,6 +32,25 @@
   }
 }
 
+.form-error-list{
+  display: none;
+  margin: 0;
+  padding: 0;
+  > li{
+    font-size: 12px;
+    list-style: none;
+    color: #ff5b5b;
+  }
+}
+
+.form-error{
+  > div input{
+    border-color: #ff5b5b !important;
+  }
+  > div ul.form-error-list {
+    display: block;
+  }
+}
 
 .open{
     > .nav-dropdown-items{
@@ -49,3 +68,4 @@
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     }
 }
+
