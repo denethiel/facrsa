@@ -4,6 +4,21 @@ import { FormBuilder,
          FormGroup,
          Validators, AbstractControl} from '@angular/forms';
 
+export class PasswordValidation{
+    static MatchPassword(AC: AbstractControl):any{
+        let password = AC.get('password').value;
+        let confirmPassword = AC.get('confirmPassword').value;
+        if(password != confirmPassword){
+            console.log('false');
+            AC.get('confirmPassword').setErrors({MatchPassword: true})
+        }else{
+            console.log('true');
+            return null;
+        }
+
+    }
+}
+
 @Component({
     templateUrl:'app/pages/register.component.html'
 })
@@ -22,6 +37,8 @@ export class RegisterComponent{
             'email':['', Validators.required],
             'password':['', Validators.required],
             'confirmPassword':['', Validators.required]
+        },{
+            validator: PasswordValidation.MatchPassword
         });
         this.email = this.registerForm.controls['email'];
         this.password = this.registerForm.controls['password'];

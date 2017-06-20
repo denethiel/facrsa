@@ -38,6 +38,7 @@
 								<ul class="form-error-list">
 									<li *ngIf="!confirmPassword.valid">Contraseña Invalida</li>
 									<li *ngIf="confirmPassword.hasError('required')">Contraseña Requerida</li>
+									<li *ngIf="confirmPassword.hasError('MatchPassword')">Contraseñas no coinciden</li>
 								</ul>
 							</div>
 						</div>
@@ -53,7 +54,7 @@
 
 						<div class="form-group text-center m-t-40">
 							<div class="col-xs-12">
-								<button class="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit">
+								<button class="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit" [disabled]="registerForm.invalid">
 									Registrarse
 								</button>
 							</div>
