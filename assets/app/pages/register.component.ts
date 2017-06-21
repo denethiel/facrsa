@@ -29,6 +29,7 @@ export class RegisterComponent{
     email: AbstractControl;
     password: AbstractControl;
     confirmPassword : AbstractControl;
+    conditions: AbstractControl;
 
     constructor(private fb: FormBuilder) { }
 
@@ -36,13 +37,15 @@ export class RegisterComponent{
         this.registerForm = this.fb.group({
             'email':['', Validators.required],
             'password':['', Validators.required],
-            'confirmPassword':['', Validators.required]
+            'confirmPassword':['', Validators.required],
+            'conditions':[false]
         },{
             validator: PasswordValidation.MatchPassword
         });
         this.email = this.registerForm.controls['email'];
         this.password = this.registerForm.controls['password'];
         this.confirmPassword = this.registerForm.controls['confirmPassword'];
+        this.conditions = this.registerForm.controls['conditions'];
     }
 
     ngOnInit(): void{
