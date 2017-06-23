@@ -1,10 +1,12 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+
+import {ValidationService} from './validation.service';
 
 import { FormBuilder,
          FormGroup,
-         Validators, AbstractControl} from '@angular/forms';
+         Validators, AbstractControl, FormControl} from '@angular/forms';
 
-export class PasswordValidation{
+export class RegisterValidators{
     static MatchPassword(AC: AbstractControl):any{
         let password = AC.get('password').value;
         let confirmPassword = AC.get('confirmPassword').value;
@@ -15,9 +17,39 @@ export class PasswordValidation{
             console.log('true');
             return null;
         }
+    }
 
+    /*static AcceptConditions(AC: AbstractControl):any{
+        let conditions = AC.get('conditions').value;
+        if(!conditions){
+            AC.get('conditions').setErrors({AcceptConditions: true})
+        }else{
+            return null;
+        }
+    }*/
+}
+
+@Component({
+    selector: 'error-messages',
+    template:`
+        <li *ngIf="errorMessage !== null">{{errorMessage}}</li>
+    `
+})
+export class ErrorMessages {
+    //xerrorMessage: string;
+    @Input() control: FormControl;
+    constructor() {}
+
+    get errorMessage(){
+        for(let propertyName in this.control.errors){
+            if(this.control.errors.hasOwnProperty(propertyName) && this.control.touched){
+                return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+            }
+        }
+        return null;
     }
 }
+
 
 @Component({
     templateUrl:'app/pages/register.component.html'
@@ -35,12 +67,12 @@ export class RegisterComponent{
 
     createForm():void{
         this.registerForm = this.fb.group({
-            'email':['', Validators.required],
-            'password':['', Validators.required],
-            'confirmPassword':['', Validators.required],
-            'conditions':[false]
+            'email':['', [Validators.required, ValidationService.emailValidator]],
+            'password':['', [Validators.required, ValidationService.passwordValidator]],
+            'confirmPassword':['', [Validators.required, ValidationService.passwordValidator]],
+            'conditions':['', [Validators.required, ValidationService.acceptConditions]]
         },{
-            validator: PasswordValidation.MatchPassword
+            validator: RegisterValidators.MatchPassword
         });
         this.email = this.registerForm.controls['email'];
         this.password = this.registerForm.controls['password'];
@@ -53,6 +85,8 @@ export class RegisterComponent{
     }
 
     onSubmit(value:any):void{
-        console.log('you sub:' + value );
+        console.log(value);
     }
 }
+
+export const REGISTER_COMPONENTS = [RegisterComponent, ErrorMessages];
