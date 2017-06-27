@@ -2,6 +2,8 @@ import { Component, OnInit, Input} from '@angular/core';
 
 import {ValidationService} from './validation.service';
 
+import {AuthService} from '../auth/auth.service';
+
 import { FormBuilder,
          FormGroup,
          Validators, AbstractControl, FormControl} from '@angular/forms';
@@ -63,7 +65,7 @@ export class RegisterComponent{
     confirmPassword : AbstractControl;
     conditions: AbstractControl;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private auth: AuthService) { }
 
     createForm():void{
         this.registerForm = this.fb.group({
@@ -82,10 +84,11 @@ export class RegisterComponent{
 
     ngOnInit(): void{
         this.createForm();
+        console.log("Register Component Iniciado");
     }
 
     onSubmit(value:any):void{
-        console.log(value);
+        this.auth.register(value);
     }
 }
 

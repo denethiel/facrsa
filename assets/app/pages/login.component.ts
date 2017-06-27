@@ -6,6 +6,8 @@ import { FormBuilder,
 
 import {ValidationService} from './validation.service';
 
+import {AuthService} from '../auth/auth.service';
+
 @Component({
     templateUrl:'app/pages/login.component.html'
 })
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit{
     password: AbstractControl;
     remember: AbstractControl;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private auth: AuthService) {
      }
 
 
@@ -39,6 +41,6 @@ export class LoginComponent implements OnInit{
      }
      
      onSubmit(value:any):void{
-         console.log('you submitted value:' , value);
+         this.auth.login(value);
      }
 }

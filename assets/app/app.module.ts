@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-import { AuthService } from './auth/auth.service';
+import { AuthService, authHttpServiceFactory } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 
 import { AppComponent }   from './app.component';
@@ -21,6 +21,9 @@ import { AppRoutingModule } from './app.routing';
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
  
+// Auth Request
+import { Http, RequestOptions  } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 @NgModule({
     imports:[
@@ -40,7 +43,11 @@ import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
         NAV_MENU_DIRECTIVES ],
     providers: [{
         provide: LocationStrategy,
-        useClass: HashLocationStrategy
+        useClass: HashLocationStrategy,
+    },
+    {provide: AuthHttp,
+    useFactory: authHttpServiceFactory,
+    deps:[Http, RequestOptions]
     },
     AUTH_PROVIDERS,
     AuthService,

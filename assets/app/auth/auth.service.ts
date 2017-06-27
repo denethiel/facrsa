@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSUbject';
 import { tokenNotExpired } from 'angular2-jwt';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 class User {
     id: number;
@@ -26,9 +27,7 @@ export class AuthService {
         this._http
             .post('/auth/authenticate',JSON.stringify(credentials),{headers})
             .subscribe(response => {
-                let data = response.json();
-                localStorage.setItem('auth_token', JSON.stringify(data));
-                this.setLoggedIn(true);
+                this._handleData(response);
             })
     }
 
@@ -41,15 +40,24 @@ export class AuthService {
             .post('/auth/register',JSON.stringify(formData),{headers})
             .subscribe(
                 response => {
-                    let data = response.json();
-                    localStorage.setItem('auth_token', JSON.stringify(data))
-                    this.setLoggedIn(true);
+                    this._handleData(response);
+                },error => {
+                    console.log(error);
                 }
             )
     }
 
+    _handleData(response:any){
+        let data = JSON.stringify(response.json());
+                localStorage.setItem('user',JSON.parse(data).user)
+                localStorage.setItem('auth_token', JSON.parse(data).token);
+                this.router.navigate(['/']);
+                this.setLoggedIn(true);     
+    }
+
     logout(){
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('user');
         this.router.navigate(['/']);
         this.setLoggedIn(false);
     }
@@ -62,4 +70,12 @@ export class AuthService {
     get authenticated() {
         return tokenNotExpired('auth_token');
     }
+}
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions){
+    return new AuthHttp(new AuthConfig({
+        tokenName: 'token',
+                   tokenGetter: (() => sessionStorage.getItem('auth_token')),
+                   globalHeaders: [{'Content-Type':'application/json'}],
+    }), http, options);
 }
