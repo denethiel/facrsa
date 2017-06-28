@@ -15,8 +15,7 @@ export class FullLayoutComponent implements OnInit {
        // console.log(this.route.snapshot.params);
     }
 
-    logout($event:any){
-        $event.preventDefault();
+    logout(){
         this.auth.logout();
     }
 }
