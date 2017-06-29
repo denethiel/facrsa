@@ -6,6 +6,8 @@ import {AuthGuard} from './auth/auth-guard.service';
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
+import {ConfigurationComponent} from './configuration/configuration.component'
+
 export const routes: Routes = [
     {
         path: '',
@@ -22,6 +24,11 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: './app/dashboard/dashboard.module#DashboardModule',
+                canActivate:[AuthGuard]
+            },
+            {
+                path:'configuration',
+                loadChildren:'./app/configuration/configuration.module#ConfigurationModule',
                 canActivate:[AuthGuard]
             }
         ]

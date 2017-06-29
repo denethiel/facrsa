@@ -33,7 +33,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
         ReactiveFormsModule,
         HttpModule,
         AppRoutingModule, 
-        ModalModule.forRoot(), 
+        ModalModule.forRoot(),
         BsDropdownModule.forRoot()],
     declarations: [
         AppComponent,
