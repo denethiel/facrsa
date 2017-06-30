@@ -1,4 +1,12 @@
 <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <button (click)="show('company')" class="btn btn-rounded m-b-20" [class.btn-primary]="company">Empresa</button>
+        <button (click)="show('folio')" class="btn btn-rounded m-b-20" [class.btn-primary]="folio">Folios</button>
+        <button (click)="show('parameters')" class="btn btn-rounded m-b-20" [class.btn-primary]="parameters">Parametros</button>
+        <button (click)="show('users')" class="btn btn-rounded m-b-20" [class.btn-primary]="users">Usuarios</button>
+    </div>
+</div>
+<div class="row" *ngIf="company">
     <div class="col-sm-12">
         <div class="card-box">
             <h4 class="header-title m-t-0 m-b-30">Empresa</h4>
@@ -14,10 +22,38 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="folio">
     <div class="col-sm-12">
         <div class="card-box">
             <h4 class="header-title m-t-0 m-b-30">Folios</h4>
+            <div class="row">
+                <tabset>
+                    <tab heading="Datos Generales">CFD's Aplicables</tab>
+                    <tab heading="Sucursales">Habilitación</tab>
+                    <tab heading="Certificados">Inventario</tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="parameters">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <h4 class="header-title m-t-0 m-b-30">Parametros</h4>
+            <div class="row">
+                <tabset>
+                    <tab heading="Datos Generales">CFD's Aplicables</tab>
+                    <tab heading="Sucursales">Habilitación</tab>
+                    <tab heading="Certificados">Inventario</tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="users">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <h4 class="header-title m-t-0 m-b-30">Usuarios</h4>
             <div class="row">
                 <tabset>
                     <tab heading="Datos Generales">CFD's Aplicables</tab>

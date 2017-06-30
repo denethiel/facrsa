@@ -9,12 +9,18 @@ const routes: Routes = [
         component: ConfigurationComponent,
         data:{
             title: 'Configuraciones'
-        }
+        },
+        children:[
+            {
+                path:'company',
+                
+            }
+        ]
     }
 ];
 
 @NgModule({
-    imports[RouterModule.forChild(routes)],
+    imports:[RouterModule.forChild(routes)],
     exports:[RouterModule]
 })
 export class ConfigurationRoutingModule{}

@@ -18,7 +18,7 @@ export const routes: Routes = [
         path:'',
         component: FullLayoutComponent,
         data:{
-            title:'Dashboard'
+            title:'Home'
         },
         children: [
             {
@@ -30,7 +30,7 @@ export const routes: Routes = [
                 path:'configuration',
                 loadChildren:'./app/configuration/configuration.module#ConfigurationModule',
                 canActivate:[AuthGuard]
-            }
+            },
         ]
     },
     {
@@ -45,6 +45,14 @@ export const routes: Routes = [
                 loadChildren:'./app/pages/pages.module#PagesModule',
             }
         ]
+    },
+    {
+        path:'login',
+        redirectTo:'pages/login'
+    },
+    {
+        path:'register',
+        redirectTo:'pages/register'
     }
 ]
 @NgModule({
