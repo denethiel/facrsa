@@ -21,6 +21,27 @@ module.exports = {
     encryptedPassword:{
       type:'string'
     },
+    rfc:{
+      type:'string'
+    },
+    name:{
+      type:'string'
+    },
+    address:{
+      model:'address'
+    },
+    telephone:{
+      type:'integer'
+    },
+    fax:{
+      type:'string'
+    },
+    web:{
+      type:'string'
+    },
+    gln:{
+      type:'string'
+    },
     toJSON: function(){
       var obj = this.toObject();
       delete obj.encryptedPassword;

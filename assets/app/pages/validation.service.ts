@@ -7,7 +7,8 @@ export class ValidationService {
             'invalidPassword':'Contraseña Invalido. La contraseña debe tener almenos 6 caracteres, y contener un numero.',
             'minlength': `Tamaño minimo ${validatorValue.requiredLength}`,
             'matchError': 'Contraseñas no coinciden',
-            'conditionsError':'Debe aceptar los terminos y condiciones'
+            'conditionsError':'Debe aceptar los terminos y condiciones',
+            'invalidRFC':'RFC Invalido'
         };
         return config[validatorName];
     }
@@ -17,6 +18,14 @@ export class ValidationService {
             return null;
         }else{
             return {'invalidEmailAddress': true};
+        }
+    }
+
+    static rfcValidator(control: AbstractControl){
+        if(control.value.match(/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))?$/)){
+            return null
+        }else{
+            return {'invalidRFC':true};
         }
     }
 
