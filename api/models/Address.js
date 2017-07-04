@@ -9,13 +9,14 @@ module.exports = {
 
   attributes: {
     street:{
-      type:'string'
+      type:'string',
+      required:true
     },
     num_ext:{
-      type:'integer'
+      type:'integer',
     },
     num_int:{
-      type:'integer'
+      type:'integer',
     },
     colony:{
       type:'string'
@@ -23,17 +24,20 @@ module.exports = {
     postal_code:{
       type:'integer'
     },
-    city:{
+    location:{
       type:'string'
     },
-    town:{
-      type:'string'
+    city:{
+      type:'string',
+      required:true
     },
     state:{
-      type:'string'
+      type:'string',
+      required:true
     },
     country:{
-      type:'string'
+      type:'string',
+      required:true
     },
     reference:{
       type:'string'

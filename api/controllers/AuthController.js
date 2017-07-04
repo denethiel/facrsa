@@ -32,6 +32,15 @@ module.exports = {
     },
 
     register : function (req, res){
+        if(_.isUndefined(req.body.email)){
+            return res.badRequest('Correo electronico requerdido');
+        }
+        if(_.isUndefined(req.body.password)){
+            return res.badRequest('Contraseña requerida');
+        }
+        if(_.isUndefined(req.body.confirmPassword)){
+            return res.badRequest('Confirmar contraseña requerida');
+        }
         if(req.body.password !== req.body.confirmPassword){
             return res.json(401,'Password does\'t match');
         }
