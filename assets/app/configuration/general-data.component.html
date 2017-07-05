@@ -1,5 +1,5 @@
 <div class="pull-right">
-    <button class="btn btn-info m-b-5">
+    <button class="btn btn-info m-b-5" (click)="edit()">
         <i class="fa fa-pencil m-r-5"></i>
         <span>Editar</span>
     </button>
@@ -13,76 +13,76 @@
     <div class="row">
         <div class="form-group col-lg-6">
             <label for="name">Nombre o Razon Social</label>
-            <input type="text" class="form-control" placeholder="Denethiel Studio" readonly>
+            <input type="text" class="form-control" placeholder="Denethiel Studio" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-6">
             <label for="rfc">RFC</label>
-            <input type="text" class="form-control" placeholder="NEO110803L83" readonly>
+            <input type="text" class="form-control" placeholder="NEO110803L83" [readonly]="isDisabled()">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
             <label for="name">Direccion Web</label>
-            <input type="text" class="form-control" placeholder="www.denethielstudio.com" readonly>
+            <input type="text" class="form-control" placeholder="www.denethielstudio.com" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-6">
             <label for="rfc">GLN</label>
-            <input type="text" class="form-control" placeholder="" readonly>
+            <input type="text" class="form-control" placeholder="" [readonly]="isDisabled()">
         </div>
     </div>
     <h4 class="header-title m-t-20 m-b-10">Domicilio Fiscal</h4>
      <div class="row">
         <div class="form-group col-lg-4">
             <label for="name">Calle</label>
-            <input type="text" class="form-control" placeholder="Leandro Valle #53" readonly>
+            <input type="text" class="form-control" placeholder="Leandro Valle #53" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">No. Exterior</label>
-            <input type="text" class="form-control" placeholder="607" readonly>
+            <input type="text" class="form-control" placeholder="607" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">No. Interior</label>
-            <input type="text" class="form-control" placeholder="1" readonly>
+            <input type="text" class="form-control" placeholder="1" [readonly]="isDisabled()">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-12">
             <label for="name">Referencia</label>
-            <input type="text" class="form-control" placeholder="" readonly>
+            <input type="text" class="form-control" placeholder="" [readonly]="isDisabled()">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-4">
             <label for="name">Colonia</label>
-            <input type="text" class="form-control" placeholder="Centro" readonly>
+            <input type="text" class="form-control" placeholder="Centro" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">Localidad</label>
-            <input type="text" class="form-control" placeholder="" readonly>
+            <input type="text" class="form-control" placeholder="" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">Municipio</label>
-            <input type="text" class="form-control" placeholder="Coatzacoalcos" readonly>
+            <input type="text" class="form-control" placeholder="Coatzacoalcos" [readonly]="isDisabled()">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-4">
             <label for="name">e-Mail</label>
-            <input type="text" class="form-control" placeholder="denethielstudio.com" readonly>
+            <input type="text" class="form-control" placeholder="denethielstudio.com" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">Teléfono</label>
-            <input type="text" class="form-control" placeholder="9211271379" readonly>
+            <input type="text" class="form-control" placeholder="9211271379" [readonly]="isDisabled()">
         </div>
         <div class="form-group col-lg-4">
             <label for="rfc">Fax</label>
-            <input type="text" class="form-control" placeholder="" readonly>
+            <input type="text" class="form-control" placeholder="" [readonly]="isDisabled()">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-lg-12">
             <label for="name">Regímenes Fiscales</label>
-            <input type="text" class="form-control" placeholder="REGIMEN GENERAL DE LEY PERSONAS MORALES" readonly>
+            <input type="text" class="form-control" placeholder="REGIMEN GENERAL DE LEY PERSONAS MORALES" [readonly]="isDisabled()">
         </div>
     </div>
 </form>

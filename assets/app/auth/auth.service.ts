@@ -5,18 +5,21 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
-class User {
-    id: number;
-    email: string;
-}
+import {Address, User} from '../shared/models';
+import {UserService} from '../shared/user.service';
+
+
 @Injectable()
 export class AuthService {
+    currentUser: User;
+    currentUser$ = new BehaviorSubject<User>(this.currentUser);
     loggedIn: boolean;
     loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-    constructor(private router: Router, private _http: Http){
+    constructor(private router: Router, private _http: Http, private userService: UserService){
         if(this.authenticated){
             this.setLoggedIn(true);
+            this.userService.setCurrentUser(<User>JSON.parse(localStorage.getItem('user')))
         }
     }
 
@@ -49,9 +52,12 @@ export class AuthService {
 
     _handleData(response:any){
         let data = JSON.stringify(response.json());
-                localStorage.setItem('user',JSON.parse(data).user)
+            
+                localStorage.setItem('user',JSON.stringify(JSON.parse(data).user));
                 localStorage.setItem('auth_token', JSON.parse(data).token);
                 this.router.navigate(['/']);
+                //console.log(JSON.parse(data).user);
+                this.userService.setCurrentUser(<User>JSON.parse(data).user)
                 this.setLoggedIn(true);     
     }
 
