@@ -10,7 +10,7 @@
                     <h4 class="text-uppercase font-bold m-b-0">Registro</h4>
                 </div>
                 <div class="panel-body">
-                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form-horizontal m-t-20" action="index.html">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" class="form-horizontal m-t-20" action="">
 
 						<div class="form-group" [class.form-error]="!email.valid && email.touched">
 							<div class="col-xs-12">

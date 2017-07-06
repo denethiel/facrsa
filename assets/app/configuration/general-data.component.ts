@@ -4,7 +4,8 @@ import { FormBuilder,
          Validators,
          AbstractControl } from '@angular/forms';
 import {ValidationService} from '../pages/validation.service';
-import {AuthService} from '../auth/auth.service';
+import {UserService} from '../shared/user.service';
+import {User, Address} from '../shared/models';
 
 @Component({
     selector:'general-data',
@@ -13,6 +14,7 @@ import {AuthService} from '../auth/auth.service';
 export class GeneralDataComponent implements OnInit {
 
     generalDataForm: FormGroup;
+    currentUser: User;
 
     name: AbstractControl;
     rfc: AbstractControl;
@@ -28,22 +30,81 @@ export class GeneralDataComponent implements OnInit {
     city: AbstractControl;
     state: AbstractControl;
     country: AbstractControl;
+    email: AbstractControl;
+    telephone: AbstractControl;
+    fax: AbstractControl;
 
+    editMode : boolean = false;
+    constructor(private fb: FormBuilder, private userService: UserService ) {
 
-    is_edit : boolean = false;
-    constructor(private fb: FormBuilder, private auth:AuthService ) {}
+    }
 
     isDisabled():boolean{
-        return this.is_edit;
+        return !this.editMode;
     }
     edit():void{
-        this.is_edit = true;
+        this.editMode = true;
+    }
+
+    save():void{
+        this.editMode = false;
+        console.log(this.generalDataForm.value);
     }
 
     createForm():void{
-
+        if(this.currentUser.address){
+            
+        }else{
+            console.log("No hay ")
+        }
+        console.log(this.currentUser.address.street);
+        console.log(this.currentUser.address);
+        this.generalDataForm = this.fb.group({
+            'name':[this.currentUser.name],
+            'rfc':[(this.currentUser.rfc != undefined)?this.currentUser.rfc:''],
+            'web':[(this.currentUser.web != undefined)?this.currentUser.web:''],
+            'gln':[(this.currentUser.gln != undefined)?this.currentUser.gln:''],
+            'street':[(this.currentUser.address.street != undefined)?this.currentUser.address.street:''],
+            'num_ext':[(this.currentUser.address.num_ext != undefined)?this.currentUser.address.num_ext:''],
+            'num_int':[(this.currentUser.address.num_ext != undefined)?this.currentUser.address.num_int:''],
+            'reference':[(this.currentUser.address.reference != undefined)? this.currentUser.address.reference:''],
+            'colony':[(this.currentUser.address.reference != undefined)?this.currentUser.address.colony:''],
+            'location':[(this.currentUser.address.location != undefined)?this.currentUser.address.location:''],
+            'city':[(this.currentUser.address.city != undefined)?this.currentUser.address.city:''],
+            'postal_code':[(this.currentUser.address.postal_code != undefined)?this.currentUser.address.postal_code:''],
+            'state':[(this.currentUser.address.state != undefined)?this.currentUser.address.state:''],
+            'country':[(this.currentUser.address.country != undefined)?this.currentUser.address.country:''],
+            'email':[(this.currentUser.email != undefined)?this.currentUser.email:''],
+            'telephone':[(this.currentUser.telephone != undefined)?this.currentUser.telephone:''],
+            'fax':[(this.currentUser.fax != undefined)?this.currentUser.fax:'']
+            
+        });
+        this.name = this.generalDataForm.controls['name'];
+        this.rfc = this.generalDataForm.controls['rfc'];
+        this.web = this.generalDataForm.controls['web'];
+        this.gln = this.generalDataForm.controls['gln'];
+        this.street = this.generalDataForm.controls['street'];
+        this.num_ext = this.generalDataForm.controls['num_ext'];
+        this.num_int = this.generalDataForm.controls['num_int'];
+        this.reference = this.generalDataForm.controls['reference'];
+        this.colony = this.generalDataForm.controls['colony'];
+        this.location = this.generalDataForm.controls['location'];
+        this.city = this.generalDataForm.controls['city'];
+        this.postal_code = this.generalDataForm.controls['postal_code'];
+        this.state = this.generalDataForm.controls['state'];
+        this.country = this.generalDataForm.controls['country'];
+        this.email = this.generalDataForm.controls['email'];
+        this.telephone = this.generalDataForm.controls['telephone'];
+        this.fax = this.generalDataForm.controls['fax'];
     }
     ngOnInit():void{
+        this.userService.currentUser
+            .subscribe(
+                (user: User) => {
+                    this.currentUser = user;
+                    console.log(this.currentUser);
+                }
+            )
         this.createForm();
     }
 }

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthService, authHttpServiceFactory } from './auth/auth.service';
+import {UserService} from './shared/user.service';
 import { AuthGuard } from './auth/auth-guard.service';
 
 import { AppComponent }   from './app.component';
@@ -51,6 +52,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
     },
     AUTH_PROVIDERS,
     AuthService,
+    UserService,
     AuthGuard],
     bootstrap:    [AppComponent],
 })
