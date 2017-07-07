@@ -48,36 +48,31 @@ export class GeneralDataComponent implements OnInit {
 
     save():void{
         this.editMode = false;
-        console.log(this.generalDataForm.value);
+        this.userService.saveGeneralData(this.generalDataForm.value);
     }
 
     createForm():void{
-        if(this.currentUser.address){
-            
-        }else{
-            console.log("No hay ")
-        }
-        console.log(this.currentUser.address.street);
-        console.log(this.currentUser.address);
+
         this.generalDataForm = this.fb.group({
+            'id':[this.currentUser.id],
             'name':[this.currentUser.name],
             'rfc':[(this.currentUser.rfc != undefined)?this.currentUser.rfc:''],
             'web':[(this.currentUser.web != undefined)?this.currentUser.web:''],
             'gln':[(this.currentUser.gln != undefined)?this.currentUser.gln:''],
-            'street':[(this.currentUser.address.street != undefined)?this.currentUser.address.street:''],
-            'num_ext':[(this.currentUser.address.num_ext != undefined)?this.currentUser.address.num_ext:''],
-            'num_int':[(this.currentUser.address.num_ext != undefined)?this.currentUser.address.num_int:''],
-            'reference':[(this.currentUser.address.reference != undefined)? this.currentUser.address.reference:''],
-            'colony':[(this.currentUser.address.reference != undefined)?this.currentUser.address.colony:''],
-            'location':[(this.currentUser.address.location != undefined)?this.currentUser.address.location:''],
-            'city':[(this.currentUser.address.city != undefined)?this.currentUser.address.city:''],
-            'postal_code':[(this.currentUser.address.postal_code != undefined)?this.currentUser.address.postal_code:''],
-            'state':[(this.currentUser.address.state != undefined)?this.currentUser.address.state:''],
-            'country':[(this.currentUser.address.country != undefined)?this.currentUser.address.country:''],
+            'street':[(this.currentUser.address != undefined)?this.currentUser.address.street:''],
+            'num_ext':[(this.currentUser.address != undefined)?this.currentUser.address.num_ext:''],
+            'num_int':[(this.currentUser.address != undefined)?this.currentUser.address.num_int:''],
+            'reference':[(this.currentUser.address != undefined)? this.currentUser.address.reference:''],
+            'colony':[(this.currentUser.address != undefined)?this.currentUser.address.colony:''],
+            'location':[(this.currentUser.address != undefined)?this.currentUser.address.location:''],
+            'city':[(this.currentUser.address != undefined)?this.currentUser.address.city:''],
+            'postal_code':[(this.currentUser.address != undefined)?this.currentUser.address.postal_code:''],
+            'state':[(this.currentUser.address != undefined)?this.currentUser.address.state:''],
+            'country':[(this.currentUser.address != undefined)?this.currentUser.address.country:''],
             'email':[(this.currentUser.email != undefined)?this.currentUser.email:''],
             'telephone':[(this.currentUser.telephone != undefined)?this.currentUser.telephone:''],
             'fax':[(this.currentUser.fax != undefined)?this.currentUser.fax:'']
-            
+
         });
         this.name = this.generalDataForm.controls['name'];
         this.rfc = this.generalDataForm.controls['rfc'];

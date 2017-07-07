@@ -14,6 +14,7 @@ export class User {
 }
 
 export class Address{
+    id:number;
     street?:string;
     num_ext?: number;
     num_int?: number;

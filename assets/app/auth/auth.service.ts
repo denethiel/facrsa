@@ -37,7 +37,7 @@ export class AuthService {
     register(formData:any){
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('token');
         this.setLoggedIn(false);
         this._http
             .post('/auth/register',JSON.stringify(formData),{headers})
@@ -52,17 +52,17 @@ export class AuthService {
 
     _handleData(response:any){
         let data = JSON.stringify(response.json());
-            
+
                 localStorage.setItem('user',JSON.stringify(JSON.parse(data).user));
-                localStorage.setItem('auth_token', JSON.parse(data).token);
+                localStorage.setItem('token', JSON.parse(data).token);
                 this.router.navigate(['/']);
                 //console.log(JSON.parse(data).user);
                 this.userService.setCurrentUser(<User>JSON.parse(data).user)
-                this.setLoggedIn(true);     
+                this.setLoggedIn(true);
     }
 
     logout(){
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('token');
         localStorage.removeItem('user');
         this.setLoggedIn(false);
         this.router.navigate(['/pages/login']);
@@ -74,14 +74,29 @@ export class AuthService {
     }
 
     get authenticated() {
-        return tokenNotExpired('auth_token');
+        console.log()
+        return tokenNotExpired('token');
+
     }
 }
 
+export function authHttpServiceFactory(http: Http){
+  return new AuthHttp(new AuthConfig({
+    headerName: 'Authorization',
+    headerPrefix: 'Bearer',
+    tokenName:'auth_token',
+    noJwtError: true,
+    globalHeaders:[{'Accept':'application/json'}],
+    tokenGetter:(() => localStorage.getItem('token')),
+  }),http);
+}
+/*
 export function authHttpServiceFactory(http: Http, options: RequestOptions){
     return new AuthHttp(new AuthConfig({
+        headerName:'Authorization',
+        headerPrefix:'Bearer',
         tokenName: 'token',
-                   tokenGetter: (() => sessionStorage.getItem('auth_token')),
-                   globalHeaders: [{'Content-Type':'application/json'}],
+        tokenGetter: (() => sessionStorage.getItem('auth_token')),
+        globalHeaders: [{'Content-Type':'application/json'}],
     }), http, options);
-}
+}*/

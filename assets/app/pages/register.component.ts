@@ -51,8 +51,6 @@ export class ErrorMessages {
         return null;
     }
 }
-
-
 @Component({
     templateUrl:'app/pages/register.component.html'
 })
