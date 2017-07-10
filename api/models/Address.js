@@ -7,16 +7,18 @@
 
 module.exports = {
 
+  schema: true,
+
   attributes: {
     street:{
       type:'string',
       required:true
     },
     num_ext:{
-      type:'integer',
+      type:'string',
     },
     num_int:{
-      type:'integer',
+      type:'string',
     },
     colony:{
       type:'string'

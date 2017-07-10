@@ -7,8 +7,33 @@
 
 module.exports = {
 	create: function (req, res) {
-        sails.log.debug("Hola estoy en create")
-        res.json(req.body.id);
+        //sails.log.debug(req.body)
+        User.update({id: req.body.id},{
+                        name:req.body.name,
+                        rfc: req.body.rfc,
+                        telephone: parseInt(req.body.telephone),
+                        fax: req.body.fax,
+                        web: req.body.web,
+                        gln: req.body.gln
+                    }).exec(function (err, userUpdated){
+                        if(err){
+                            res.serverError(err);
+                        }
+                        if(userUpdated.address){
+                          User.updateAddress(req.body, function(err, user){
+                            if(err){
+                              res.serverError(err);
+                            }
+                            res.json(user);
+                          })
+                        }else{
+                          User.addAddress(req.body, function(err, user){
+                            if(err){res.serverError(err);}
+                            res.json(user);
+                          })
+                        }
+                    })
+
   },
   addData:function(req,res){
       Address.create({

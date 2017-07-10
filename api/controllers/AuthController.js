@@ -14,7 +14,7 @@ module.exports = {
             return res.json(401,'Email and password required');
         }
 
-        User.findOneByEmail(email, function(err, user){
+        User.findOne({email:email}).populate('address').exec(function(err, user){
             if(!user){
                 return res.json(401,'Invalid email or password');
             }
@@ -45,7 +45,7 @@ module.exports = {
             return res.json(401,'Password does\'t match');
         }
 
-        
+
 
         User.create({email: req.body.email, password: req.body.password}).exec(function(err, user){
             if(err){

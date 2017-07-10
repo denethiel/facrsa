@@ -72,6 +72,48 @@ module.exports = {
         cb(err);
       }
     })
-  }
+  },
+  updateAddress:function(parameters, cb){
+    Address.update({id:user.address.id},{
+        street: parameters.street,
+        num_ext: parameters.num_ext,
+        num_int: parameters.num_int,
+        colony: parameters.colony,
+        postal_code: parseInt(parameters.postal_code),
+        location: parameters.location,
+        city: parameters.city,
+        state: parameters.state,
+        country: parameters.country,
+        reference: parameters.reference
+      }).exec(function(err, address){
+        if(err){cb(err)}
+        User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
+          cb(null, user);
+        })
+
+      })
+  },
+  addAddress:function(parameters, cb){
+    Address.create({
+        street: parameters.street,
+        num_ext:parameters.num_ext,
+        num_int: parameters.num_int,
+        colony: parameters.colony,
+        postal_code: parseInt(parameters.postal_code),
+        location: parameters.location,
+        city: parameters.city,
+        state: parameters.state,
+        country: parameters.country,
+        reference: parameters.reference
+        }).exec(function(err, address){
+          if(address){
+            User.update({id: parameters.id},{address: address.id}).populate('address').exec(function(err, updated){
+              cb(null, updated);
+            })
+          }else{
+            cb(err);
+          }
+        })
+  },
 };
 

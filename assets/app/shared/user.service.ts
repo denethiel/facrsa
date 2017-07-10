@@ -16,7 +16,10 @@ export class UserService {
 
     public saveGeneralData(data:any):void{
       this.http.post('/user/', JSON.stringify(data))
-      .subscribe(response => console.log(response.json()),
+      .subscribe(response => {
+        console.log(JSON.stringify(response.json()));
+        this.setCurrentUser(<User> JSON.parse(JSON.stringify(response.json())))
+      },
       err => console.log(err),
       () => console.log('Request Complete')
       );
