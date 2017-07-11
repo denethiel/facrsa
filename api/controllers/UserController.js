@@ -19,14 +19,17 @@ module.exports = {
                         if(err){
                             res.serverError(err);
                         }
-                        if(userUpdated.address){
-                          User.updateAddress(req.body, function(err, user){
+                        sails.log(userUpdated);
+                        if(userUpdated.address && userUpdated.address != '') {
+                          sails.log("Usuario tiene direccion")
+                          User.updateAddress(req.body, userUpdated.address ,function(err, user){
                             if(err){
                               res.serverError(err);
                             }
                             res.json(user);
                           })
                         }else{
+                          sails.log("Usuario no tiene direccion");
                           User.addAddress(req.body, function(err, user){
                             if(err){res.serverError(err);}
                             res.json(user);

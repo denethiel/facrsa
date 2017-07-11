@@ -73,8 +73,8 @@ module.exports = {
       }
     })
   },
-  updateAddress:function(parameters, cb){
-    Address.update({id:user.address.id},{
+  updateAddress:function(parameters,addressId, cb){
+    Address.update({id:addressId},{
         street: parameters.street,
         num_ext: parameters.num_ext,
         num_int: parameters.num_int,
@@ -107,8 +107,10 @@ module.exports = {
         reference: parameters.reference
         }).exec(function(err, address){
           if(address){
-            User.update({id: parameters.id},{address: address.id}).populate('address').exec(function(err, updated){
-              cb(null, updated);
+            User.update({id: parameters.id},{address: address.id}).exec(function(err, updated){
+              User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
+                cb(null, user);
+              })
             })
           }else{
             cb(err);
