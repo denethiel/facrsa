@@ -12,13 +12,15 @@ export class UserService {
 
     public setCurrentUser(newUser: User):void{
         this.currentUser.next(newUser);
+        console.log(this.currentUser);
     }
 
     public saveGeneralData(data:any):void{
       this.http.post('/user/', JSON.stringify(data))
       .subscribe(response => {
-        console.log(JSON.stringify(response.json()));
-        this.setCurrentUser(<User> JSON.parse(JSON.stringify(response.json())))
+        //console.log(JSON.stringify(response.json()));
+        localStorage.setItem('user',JSON.stringify(response.json()));
+        this.setCurrentUser(<User> JSON.parse(JSON.stringify(response.json())));
       },
       err => console.log(err),
       () => console.log('Request Complete')

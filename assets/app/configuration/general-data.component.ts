@@ -97,7 +97,7 @@ export class GeneralDataComponent implements OnInit {
             .subscribe(
                 (user: User) => {
                     this.currentUser = user;
-                    console.log(this.currentUser);
+                    //console.log(this.currentUser);
                 }
             )
         this.createForm();
