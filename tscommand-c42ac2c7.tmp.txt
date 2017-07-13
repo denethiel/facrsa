@@ -1,1 +1,0 @@
-assets/app/pages/pages.module.ts assets/app/.baseDir.ts --sourcemap --emitDecoratorMetadata --removeComments --noImplicitAny --experimentalDecorators --moduleResolution node --suppressExcessPropertyErrors --lib es2015,dom --target ES5 --module commonjs --outDir .tmp/public/app/

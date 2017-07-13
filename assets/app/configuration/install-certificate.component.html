@@ -1,0 +1,33 @@
+<button class="btn btn-danger m-b-5" (click)="cerModal.show()">
+        <i class="fa fa-key m-r-5"></i>
+        <span>Instalar certificado</span>
+</button>
+
+<div bsModal #cerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Instalacion de nuevo certificado</h4>
+        <button type="button" class="close pull-right" (click)="cerModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="" [formGroup]="installCertificateForm">
+        <div class="form-group">
+          <label for="cerFile">Sube tu certificado, es un archivo .CER</label>
+          <input type="file" name="cerFile">
+        </div>
+        <div class="form-group">
+          <label for="keyFile">Sube tu llave privada, es un archivo .KEY</label>
+          <input type="file" name="keyFile">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password">
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
