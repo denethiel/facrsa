@@ -38,6 +38,27 @@ module.exports = {
                     })
 
   },
+  addCertificate:function(req, res){
+    req.file('keyFile').upload({
+      dirname: '../../files',
+      maxBytes: 1000000
+    }, function whenDone(err, keyFileUploaded){
+      sails.log(keyFileUploaded);
+      if(err) return res.serverError(err);
+      req.file('cerFile').upload({
+        dirname:'../../files',
+        maxBytes:1000000
+      }, function(err, cerFileUploaded){
+        sails.log(cerFileUploaded);
+        if(err) return res.serverError(err);
+        else return res.json({
+        files: [keyFileUploaded,cerFileUploaded],
+        textParams: req.allParams();
+      });
+      })
+
+    });
+  },
   addData:function(req,res){
       Address.create({
           street: req.body.street,

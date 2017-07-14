@@ -8,11 +8,13 @@ export class UserService {
 
     constructor(private http: AuthHttp){}
 
-    currentUser: Subject<User> = new BehaviorSubject<User>(null);
+    currentUser: User;
+    currentUser$: Subject<User> = new BehaviorSubject<User>(this.currentUser);
 
     public setCurrentUser(newUser: User):void{
-        this.currentUser.next(newUser);
-        console.log(this.currentUser);
+        this.currentUser$.next(newUser);
+        this.currentUser = newUser;
+        //console.log(this.currentUser);
     }
 
     public saveGeneralData(data:any):void{
@@ -25,5 +27,12 @@ export class UserService {
       err => console.log(err),
       () => console.log('Request Complete')
       );
+    }
+
+    public uploadCertificate(data:any):void{
+      this.http.post('/user/'+this.currentUser.id+'/certificate',JSON.stringify(data))
+        .subscribe(response => {
+          console.log(response.json());
+        })
     }
 }

@@ -46,6 +46,10 @@ module.exports = {
     {
       type:'boolean'
     },
+    certificates:{
+      collection:'certificate',
+      via:'owner'
+    },
     toJSON: function(){
       var obj = this.toObject();
       delete obj.encryptedPassword;
