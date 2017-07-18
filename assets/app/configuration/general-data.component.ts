@@ -93,7 +93,7 @@ export class GeneralDataComponent implements OnInit {
         this.fax = this.generalDataForm.controls['fax'];
     }
     ngOnInit():void{
-        this.userService.currentUser
+        this.userService.currentUser$
             .subscribe(
                 (user: User) => {
                     this.currentUser = user;

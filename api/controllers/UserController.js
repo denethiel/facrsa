@@ -39,23 +39,33 @@ module.exports = {
 
   },
   addCertificate:function(req, res){
+    res.setTimeout(0);
+    if(!req.file('keyFile')._files[0]){
+      sails.log.warn('No file uploaded');
+      req.file('keyFile').upload({noop:true});
+      return res.json('no file given!');
+    }
+    sails.log(req.file('keyFile'));
     req.file('keyFile').upload({
-      dirname: '../../files',
-      maxBytes: 1000000
+      dirname: '/tmp/uploads'
     }, function whenDone(err, keyFileUploaded){
       sails.log(keyFileUploaded);
       if(err) return res.serverError(err);
-      req.file('cerFile').upload({
+      res.json({
+        files: keyFileUploaded,
+        textParams: req.allParams()
+      })
+      /*req.file('cerFile').upload({
         dirname:'../../files',
         maxBytes:1000000
       }, function(err, cerFileUploaded){
-        sails.log(cerFileUploaded);
+        //sails.log(cerFileUploaded);
         if(err) return res.serverError(err);
         else return res.json({
         files: [keyFileUploaded,cerFileUploaded],
-        textParams: req.allParams();
+        textParams: req.allParams()
       });
-      })
+      })*/
 
     });
   },

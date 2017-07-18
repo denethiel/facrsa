@@ -13,18 +13,22 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="" [formGroup]="installCertificateForm">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
         <div class="form-group">
           <label for="cerFile">Sube tu certificado, es un archivo .CER</label>
-          <input type="file" name="cerFile">
+          <input #cerFile type="file" name="cerFile">
         </div>
         <div class="form-group">
           <label for="keyFile">Sube tu llave privada, es un archivo .KEY</label>
-          <input type="file" name="keyFile">
+          <input #keyFile type="file" name="keyFile">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password">
+          <input type="password" name="password" id="password" ngModel>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-custom" type="submit">Instalar</button>
+          <button class="btn btn-custom" type="submit" (click)="cerModal.hide()">Cancelar</button>
         </div>
       </form>
       </div>

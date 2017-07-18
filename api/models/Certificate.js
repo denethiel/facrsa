@@ -16,7 +16,7 @@ module.exports = {
     },
     password:{
       type:'string'
-    }
+    },
     owner:{
       model:'user'
     }
