@@ -3,11 +3,13 @@ import {Subject, BehaviorSubject} from 'rxjs';
 import {User} from './models';
 import { AuthHttp } from 'angular2-jwt'
 import {Http, Headers, RequestOptionsArgs} from '@angular/http'
+import {Uploader} from 'angular2-http-file-upload'
+import {FileUploader} from './file-uploader'
 
 @Injectable()
 export class UserService {
 
-    constructor(private http: AuthHttp, private http$: Http){
+    constructor(private http: AuthHttp, private http$: Http, private uploaderService: Uploader){
       console.log("User Service Iniciado");
     }
 
@@ -32,6 +34,36 @@ export class UserService {
       );
     }
 
+    public saveCertificate(data:any):Promise<Object>{
+      return new Promise((resolve, reject) =>{
+        this.http.post('/user/'+this.currentUser.id+'/save-certificate', JSON.stringify(data))
+        .subscribe(response => {
+          console.log(response.json());
+          resolve(response.json())
+        },
+        err => reject(err))
+      })
+    }
+
+    public uploadCertificate(file:File):Promise<string>{
+      let uploadFile = new FileUploader(file, '/user/'+this.currentUser.id+'/upload-certificate');
+      return new Promise((resolve, reject) => {
+        this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
+            console.log("Subido")
+            resolve(response.filename);
+        };
+        this.uploaderService.onErrorUpload = (item, response, status, headers) => {
+             console.log("Error")
+             reject(response.message);
+        };
+        this.uploaderService.upload(uploadFile);
+        this.uploaderService.onProgressUpload = (item, percentComplete) => {
+        console.log(percentComplete);
+      }
+      })
+
+    }
+    /*
     public uploadCertificate(data:any):Promise<string>{
       console.log(data);
       let formData: FormData = new FormData();
@@ -55,4 +87,5 @@ export class UserService {
         .catch(reason => reject (reason.statusText));
       });
     }
+    */
 }

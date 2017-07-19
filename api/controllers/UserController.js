@@ -38,23 +38,23 @@ module.exports = {
                     })
 
   },
-  addCertificate:function(req, res){
-    res.setTimeout(0);
-    if(!req.file('keyFile')._files[0]){
-      sails.log.warn('No file uploaded');
-      req.file('keyFile').upload({noop:true});
-      return res.json('no file given!');
-    }
-    sails.log(req.file('keyFile'));
-    req.file('keyFile').upload({
-      dirname: '/tmp/uploads'
+  uploadCertificate:function(req, res){
+    User.findOne(req.param('id')).exec(function(err, user){
+      res.setTimeout(0);
+      if(!req.file('file')._files[0]){
+        sails.log.warn('No file uploaded');
+        req.file('file').upload({noop:true});
+        return res.json('no file given!');
+      }
+      req.file('file').upload({
+      dirname: '../../files/'+user.rfc+'',
+      saveAs:req.file('file').filename,
     }, function whenDone(err, keyFileUploaded){
-      sails.log(keyFileUploaded);
       if(err) return res.serverError(err);
       res.json({
-        files: keyFileUploaded,
-        textParams: req.allParams()
+        filename: keyFileUploaded[0].fd
       })
+    })
       /*req.file('cerFile').upload({
         dirname:'../../files',
         maxBytes:1000000
@@ -69,6 +69,18 @@ module.exports = {
 
     });
   },
+  saveCertificate:function(req,res){
+    Certificate.create({
+      cer_file: req.body.cerFile,
+      key_file: req.body.keyFile,
+      password: req.body.password,
+      owner: req.param('id')
+    }).exec(function(err, certificate){
+      if(err){return res.serverError(err)}
+      res.json(certificate);
+    })
+  }
+  ,
   addData:function(req,res){
       Address.create({
           street: req.body.street,

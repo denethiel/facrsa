@@ -17,14 +17,17 @@ import { NAV_MENU_DIRECTIVES } from './shared/nav-menu.directive';
 
 //Rutas
 import { AppRoutingModule } from './app.routing';
- 
+
 // Templates
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent  } from './layouts/simple-layout.component';
- 
+
 // Auth Request
 import { Http, RequestOptions  } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+
+//File Uploads
+import {Uploader} from 'angular2-http-file-upload';
 
 @NgModule({
     imports:[
@@ -33,7 +36,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        AppRoutingModule, 
+        AppRoutingModule,
         ModalModule.forRoot(),
         BsDropdownModule.forRoot()],
     declarations: [
@@ -53,6 +56,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
     AUTH_PROVIDERS,
     AuthService,
     UserService,
+    Uploader,
     AuthGuard],
     bootstrap:    [AppComponent],
 })

@@ -18,6 +18,7 @@
     "@angular/tsc-wrapped": "~4.0.0",
     "@angular/upgrade": "~4.0.0",
     "angular-in-memory-web-api": "~0.3.1",
+    "angular2-http-file-upload": "^1.0.6",
     "angular2-jwt": "^0.2.3",
     "bcrypt": "^1.0.2",
     "core-js": "^2.4.1",
