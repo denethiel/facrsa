@@ -14,12 +14,28 @@ module.exports = {
     key_file:{
       type:'string'
     },
+    serial_number:{
+      type:'string'
+    },
+    expiration_date:{
+      type:'string'
+    },
     password:{
       type:'string'
     },
     owner:{
       model:'user'
     }
+  },
+  beforeCreate: function(values, next){
+    certificateUtils.findSerialNumber(values.cer_file).then((serial_number)=>{
+      values.serial_number = serial_number;
+      certificateUtils.findExpirationData(values.cer_file).then((expiration_date)=>{
+      values.expiration_date = expiration_date;
+      next();
+    }).catch((err) => next(err));
+    }).catch((err) => next(err));
+
   }
 };
 

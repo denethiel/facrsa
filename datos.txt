@@ -1,0 +1,73 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            32:30:30:30:31:30:30:30:30:30:30:33:30:30:30:32:32:37:38:30
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=A.C. 2 de pruebas(4096), O=Servicio de Administraci\xC3\xB3n Tributaria, OU=Administraci\xC3\xB3n de Seguridad de la Informaci\xC3\xB3n/emailAddress=asisnet@pruebas.sat.gob.mx/street=Av. Hidalgo 77, Col. Guerrero/postalCode=06300, C=MX, ST=Distrito Federal, L=Coyoac\xC3\xA1n/x500UniqueIdentifier=SAT970701NN3/unstructuredName=Responsable: ACDMA
+        Validity
+            Not Before: Oct 21 22:31:39 2016 GMT
+            Not After : Oct 20 22:31:39 2020 GMT
+        Subject: CN=OLIVIA MORENO LEON/name=OLIVIA MORENO LEON, O=OLIVIA MORENO LEON, C=MX/emailAddress=erika.mendoza@sat.gob.mx/x500UniqueIdentifier=AUAC4601138F9/serialNumber=FUAB770117MMCNLT04
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:be:4a:27:a1:1a:48:e7:bf:10:fb:7f:dc:9c:bc:
+                    e8:14:73:11:f8:8a:95:83:95:76:50:61:d3:c2:58:
+                    84:7f:b4:29:6c:a5:e3:b3:97:8a:7d:af:f9:e0:fa:
+                    52:c9:a1:5a:e0:ee:d9:a8:f3:7a:ad:84:2b:b4:ed:
+                    ad:02:1f:22:49:c6:ef:ad:3b:7b:8f:3e:b0:9f:7e:
+                    b3:ea:26:8f:50:2d:f4:2b:8a:61:7b:77:58:79:0e:
+                    5d:5a:f6:c2:d8:13:36:6a:21:5d:b3:54:b2:46:64:
+                    f7:90:3f:ea:41:3e:b0:75:96:14:9c:67:8a:13:bc:
+                    5b:d9:0c:f4:d0:94:b5:75:f8:30:c4:1e:1b:4d:ea:
+                    03:ca:b3:7b:3a:fe:2c:1d:b9:28:48:bf:a6:70:1f:
+                    52:d6:c2:e9:06:59:f3:b7:63:89:42:07:c8:e1:0e:
+                    2b:2b:9e:00:31:e8:5b:1b:eb:86:7a:c7:c1:c6:08:
+                    2d:15:57:c7:56:63:f0:ee:df:c9:b3:76:4b:49:67:
+                    12:0b:51:9b:19:65:b6:d8:85:22:28:51:0a:35:c2:
+                    0a:6a:17:ce:39:97:ae:24:49:25:b6:ce:9f:4a:e4:
+                    94:99:34:29:69:a7:d1:86:79:c1:23:d3:5b:82:f4:
+                    85:2d:5a:b7:fb:d5:c7:9e:0f:04:ea:a1:24:66:44:
+                    77:2f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Non Repudiation, Data Encipherment, Key Agreement
+            Netscape Cert Type: 
+                SSL Client, S/MIME
+            X509v3 Extended Key Usage: 
+                E-mail Protection, TLS Web Client Authentication
+    Signature Algorithm: sha256WithRSAEncryption
+        47:0f:78:02:a5:cd:66:1f:46:83:2a:f4:d3:94:93:16:53:aa:
+        8a:c6:69:88:4a:23:31:b0:0e:b5:c8:94:3b:d2:c9:4a:67:de:
+        1b:05:f2:52:22:ce:a8:48:b5:38:4d:68:58:c9:d8:26:98:ad:
+        0c:31:67:39:20:09:55:a4:e6:4f:59:9b:05:26:21:23:c9:3d:
+        8f:94:2f:e5:5b:64:3c:02:78:d0:7c:fb:8d:a8:7b:61:c9:17:
+        51:72:1c:53:24:ea:a1:31:84:6f:43:2d:38:91:69:d8:df:a1:
+        86:3c:38:58:99:79:7b:1a:e9:14:0d:d8:6b:78:2b:21:4c:3c:
+        2f:a9:f2:63:e1:ec:f1:b4:31:fa:f4:52:a1:27:9c:28:20:c7:
+        1f:86:04:bd:bc:d0:c9:41:4a:dc:25:fc:32:b7:d2:49:c2:78:
+        1b:3a:d3:61:f4:b4:11:96:19:95:40:29:22:fc:f5:6a:7f:b6:
+        95:2e:36:2f:44:e2:2f:92:8e:02:b8:29:64:c6:67:a5:31:58:
+        1e:9f:4a:d1:b3:4b:a9:6a:eb:7a:d5:11:11:80:71:55:72:60:
+        17:b3:3a:4a:5f:f3:29:e0:e3:61:a8:43:e0:72:25:2e:c7:0d:
+        58:61:64:e9:b7:95:42:75:c5:69:8d:47:67:82:cc:2f:7d:24:
+        9c:4d:44:8c:02:40:25:99:b5:73:67:42:69:66:41:a8:4a:3f:
+        b0:72:45:9f:4a:09:a7:a9:44:1a:39:05:80:4d:b0:b0:42:58:
+        b0:da:19:b7:bb:df:bd:de:24:c2:5b:3a:eb:3f:3e:f9:02:21:
+        4b:42:b4:7e:5e:e9:2b:f3:f8:e9:63:cf:97:e6:3d:0a:4d:d6:
+        a9:f2:0d:28:30:6e:75:cc:94:72:58:24:03:46:aa:00:41:a3:
+        9b:e8:e1:9c:bc:5d:65:fe:d5:c7:38:97:ce:68:76:26:52:bd:
+        89:4f:8a:68:5d:fe:22:9f:94:34:c6:4b:29:e4:62:99:ff:17:
+        42:66:b4:3c:8a:9d:a7:d8:97:2b:df:75:7a:86:6a:a7:16:ef:
+        c2:64:74:06:dd:a4:a8:1d:c6:5c:11:d2:1e:f1:08:72:f3:38:
+        41:4b:ea:ed:84:3b:24:13:5e:34:9d:88:b9:62:ba:25:a8:88:
+        19:10:ed:96:a6:19:f7:96:f8:dc:8d:32:9e:6d:19:17:56:78:
+        6d:22:f1:8e:34:61:40:8c:a5:08:bb:d6:fa:66:b0:ad:e7:eb:
+        74:e1:b8:7a:30:3c:d5:5e:e8:dc:58:d5:93:41:c9:42:1f:1d:
+        fc:47:7b:d1:b9:49:97:e5:3f:33:77:17:e8:62:78:09:73:da:
+        dc:f2:5c:2b:95:19:dc:f0

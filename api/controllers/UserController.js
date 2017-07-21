@@ -4,6 +4,9 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var x509 = require('x509');
+fs = require('fs');
+
 
 module.exports = {
 	create: function (req, res) {
@@ -51,6 +54,9 @@ module.exports = {
       saveAs:req.file('file').filename,
     }, function whenDone(err, keyFileUploaded){
       if(err) return res.serverError(err);
+      var issuer = x509.parseCert(fs.readFileSync(keyFileUploaded[0].fd));
+      sails.log(issuer);
+
       res.json({
         filename: keyFileUploaded[0].fd
       })
@@ -69,6 +75,12 @@ module.exports = {
 
     });
   },
+  test:function(req, res){
+    var cert = x509.parseCert(__dirname+'/Test.cer');
+    sails.log.warn(cert);
+
+  }
+  ,
   saveCertificate:function(req,res){
     Certificate.create({
       cer_file: req.body.cerFile,
