@@ -9,6 +9,7 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthService, authHttpServiceFactory } from './auth/auth.service';
 import {UserService} from './shared/user.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import {CertificateService} from './shared/certificate.service';
 
 import { AppComponent }   from './app.component';
 import { ModalModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -56,6 +57,7 @@ import {Uploader} from 'angular2-http-file-upload';
     AUTH_PROVIDERS,
     AuthService,
     UserService,
+    CertificateService,
     Uploader,
     AuthGuard],
     bootstrap:    [AppComponent],

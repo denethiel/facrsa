@@ -36,12 +36,10 @@ export class UserService {
 
     public saveCertificate(data:any):Promise<Object>{
       return new Promise((resolve, reject) =>{
-        this.http.post('/user/'+this.currentUser.id+'/save-certificate', JSON.stringify(data))
-        .subscribe(response => {
+        self["io"].socket.post('/user/'+this.currentUser.id+'/save-certificate', JSON.stringify(data),function(response:any) {
           console.log(response.json());
           resolve(response.json())
-        },
-        err => reject(err))
+        })
       })
     }
 

@@ -6,7 +6,7 @@
  */
 var x509 = require('x509');
 fs = require('fs');
-
+let certificateRoom = "certificate";
 
 module.exports = {
 	create: function (req, res) {
@@ -76,17 +76,29 @@ module.exports = {
     var cert = x509.parseCert(__dirname+'/Test.cer');
     sails.log.warn(cert);
 
-  }
-  ,
+  },
+  getCertificates:function(req,res){
+    let ownerId = req.param('id');
+    sails.log(ownerId);
+    Certificate.find({owner: ownerId}).then(function(certificates){
+      sails.sockets.join(req,certificateRoom+ownerId,function(err){
+        if(err){return res.serverError(err);}
+        return res.json(certificates);
+      });
+    }).catch(function(err){
+      res.serverError(err);
+    })
+  },
   saveCertificate:function(req,res){
+    let ownerId = req.param('id');
     Certificate.create({
       cer_file: req.body.cerFile,
       key_file: req.body.keyFile,
       password: req.body.password,
-      owner: req.param('id')
+      owner: ownerId
     }).exec(function(err, certificate){
       if(err){return res.serverError(err)}
-      res.json(certificate);
+      sails.sockets.broadcast(certificateRoom+ownerId,"created",certificate);
     })
   }
   ,

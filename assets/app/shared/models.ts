@@ -13,6 +13,18 @@ export class User {
     updatedAt:string;
 }
 
+export class Certificate{
+    id:number;
+    cer_file:string;
+    key_file:string;
+    serial_number:string;
+    expiration_date:string;
+    password:string;
+    owner:number;
+    createdAt:string;
+    updatedAt:string;
+}
+
 export class Address{
     id:number;
     street?:string;

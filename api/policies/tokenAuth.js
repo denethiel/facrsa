@@ -14,8 +14,12 @@ module.exports = function(req, res, next){
     }
   }else if(req.param('token')){
     token = req.param('token');
-    delete req.query.tokenM
-  }else{
+    delete req.query.token;
+  }else if(req.socket && req.socket.handshake && req.socket.handshake.query && req.socket.handshake.query.token){
+    token = req.socket.handshake.query.token;
+  }
+  else{
+    sails.log(req.socket.handshake);
     return res.json(401,{err:'No Authorization Header was found'});
   }
   sailsTokenAuth.verifyToken(token,function(err,token){

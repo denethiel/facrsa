@@ -3,7 +3,8 @@ var jwt = require('jsonwebtoken');
 module.exports.issueToken = function(payload){
     return jwt.sign(
         payload,
-        process.env.TOKEN_SECRET || "online"
+        process.env.TOKEN_SECRET || "online",
+        {expiresInMinutes: 60*5}
     );
 };
 
