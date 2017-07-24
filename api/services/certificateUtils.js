@@ -2,9 +2,9 @@ var shell = require('shelljs');
 var Promise = require('promise');
 
 findSerialNumber = function(cerFile){
-  var deferred = new Promise((resolve, reject){
+  var deferred = new Promise(function(resolve, reject){
     if(cerFile.includes(".cer")){
-      var raw = exec('openssl x509 -inform DER -in "'+cerFile+'" -noout -serial',{silent: true}).stdout;
+      var raw = shell.exec('openssl x509 -inform DER -in "'+cerFile+'" -noout -serial',{silent: true}).stdout;
       sails.log(raw);
       var wildSerialNumber = raw.split("=")[1];
       var numbers = wildSerialNumber.split("");
@@ -29,15 +29,16 @@ findSerialNumber = function(cerFile){
 }
 
 findExpirationData = function(cerFile){
-  var deferred = new Promise((resolve, reject){
+  var deferred = new Promise(function(resolve, reject){
     if(cerFile.includes(".cer")){
-      var expirationDate = exec('openssl x509 -inform DER -in "'+cerFIle+'" -noout -enddate',{silent:true}).stdout;
+      let raw = shell.exec('openssl x509 -inform DER -in "'+cerFile+'" -noout -enddate',{silent:true}).stdout;
+      var expirationDate = raw.split("=")[1];
       resolve(expirationDate);
     }else{
       reject("Error: .cer file not provided");
     }
-
   })
+  return deferred;
 }
 
 module.exports = {

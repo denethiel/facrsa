@@ -54,9 +54,6 @@ module.exports = {
       saveAs:req.file('file').filename,
     }, function whenDone(err, keyFileUploaded){
       if(err) return res.serverError(err);
-      var issuer = x509.parseCert(fs.readFileSync(keyFileUploaded[0].fd));
-      sails.log(issuer);
-
       res.json({
         filename: keyFileUploaded[0].fd
       })
