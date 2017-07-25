@@ -79,7 +79,8 @@ module.exports = {
   },
   getCertificates:function(req,res){
     let ownerId = req.param('id');
-    sails.log(ownerId);
+    sails.log.warn("GetCertificates")
+    sails.log(sails.sockets.getId(req));
     Certificate.find({owner: ownerId}).then(function(certificates){
       sails.sockets.join(req,certificateRoom+ownerId,function(err){
         if(err){return res.serverError(err);}
@@ -91,6 +92,8 @@ module.exports = {
   },
   saveCertificate:function(req,res){
     let ownerId = req.param('id');
+    sails.log.warn("SaveCertificate");
+    sails.log(sails.sockets.getId(req));
     Certificate.create({
       cer_file: req.body.cerFile,
       key_file: req.body.keyFile,
@@ -98,7 +101,12 @@ module.exports = {
       owner: ownerId
     }).exec(function(err, certificate){
       if(err){return res.serverError(err)}
-      sails.sockets.broadcast(certificateRoom+ownerId,"created",certificate);
+      let msg = {
+        verb: 'created',
+        data: certificate
+      }
+      sails.sockets.broadcast(certificateRoom+ownerId,"certificate",msg);
+      res.ok();
     })
   }
   ,

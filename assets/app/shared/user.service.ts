@@ -17,8 +17,9 @@ export class UserService {
     currentUser$: Subject<User> = new BehaviorSubject<User>(this.currentUser);
 
     public setCurrentUser(newUser: User):void{
-        this.currentUser$.next(newUser);
         this.currentUser = newUser;
+        this.currentUser$.next(this.currentUser);
+        
         //console.log(this.currentUser);
     }
 
@@ -35,10 +36,11 @@ export class UserService {
     }
 
     public saveCertificate(data:any):Promise<Object>{
+      let token = localStorage.getItem('token');
       return new Promise((resolve, reject) =>{
-        self["io"].socket.post('/user/'+this.currentUser.id+'/save-certificate', JSON.stringify(data),function(response:any) {
-          console.log(response.json());
-          resolve(response.json())
+        self["io"].socket.post('/user/'+this.currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
+          console.log(response);
+          resolve(response)
         })
       })
     }

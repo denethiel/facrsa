@@ -74,7 +74,6 @@ export class AuthService {
     }
 
     get authenticated() {
-        console.log()
         return tokenNotExpired('token');
 
     }

@@ -10,9 +10,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr role="row">
-                    <td>1232131242141232321</td>
-                    <td>Agosto del 2013</td>
+                <tr role="row" *ngFor="let certificate of certificates">
+                    <td>{{certificate.serial_number}}</td>
+                    <td>{{certificate.expiration_date}}</td>
                     <td>
                         <button class="btn btn-icon btn-danger m-b-5">
                             <i class="fa fa-remove"></i>
@@ -23,3 +23,4 @@
         </table>
     </div>
 </div>
+<div class="row">{{certificates}}</div>

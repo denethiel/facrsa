@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CertificateService} from '../shared/certificate.service';
+import {Certificate }from '../shared/models';
 
 @Component({
     selector:'certificate',
@@ -7,13 +8,16 @@ import {CertificateService} from '../shared/certificate.service';
 })
 export class CertificateComponent implements OnInit{
 
+    certificates: Certificate[];
+
     constructor(private cerService: CertificateService) {}
     
     ngOnInit():void{
-        this.cerService.certificates$
+        this.cerService.certificates
         .subscribe(
-            (certificates:any)=>{
-                console.log(certificates);
+            (certificates:Certificate[])=>{
+                this.certificates = certificates;
+                console.log(this.certificates);
             }
         )
     }
