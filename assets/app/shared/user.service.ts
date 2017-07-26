@@ -13,14 +13,18 @@ export class UserService {
       console.log("User Service Iniciado");
     }
 
-    currentUser: User;
-    currentUser$: Subject<User> = new BehaviorSubject<User>(this.currentUser);
+    private _currentUser: User;
+    private currentUser$: Subject<User> = new BehaviorSubject<User>(this._currentUser);
 
     public setCurrentUser(newUser: User):void{
-        this.currentUser = newUser;
-        this.currentUser$.next(this.currentUser);
+        this._currentUser = newUser;
+        this.currentUser$.next(this._currentUser);
         
         //console.log(this.currentUser);
+    }
+
+    get currentUser(){
+      return this.currentUser$.asObservable();
     }
 
     public saveGeneralData(data:any):void{
@@ -35,18 +39,29 @@ export class UserService {
       );
     }
 
+    public leave():Promise<any>{
+      let token = localStorage.getItem('token');
+      return new Promise((resolve, reject) =>{
+        self["io"].socket.post('/user/'+this._currentUser.id+'/leave?token='+token,function(response:any){
+        resolve(response);
+        })
+      })
+      
+    }
+
     public saveCertificate(data:any):Promise<Object>{
       let token = localStorage.getItem('token');
       return new Promise((resolve, reject) =>{
-        self["io"].socket.post('/user/'+this.currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
-          console.log(response);
+        console.log(this._currentUser)
+        self["io"].socket.post('/user/'+this._currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
+          console.log();
           resolve(response)
         })
       })
     }
 
     public uploadCertificate(file:File):Promise<string>{
-      let uploadFile = new FileUploader(file, '/user/'+this.currentUser.id+'/upload-certificate');
+      let uploadFile = new FileUploader(file, '/user/'+this._currentUser.id+'/upload-certificate');
       return new Promise((resolve, reject) => {
         this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
             console.log("Subido")

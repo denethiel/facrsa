@@ -39,7 +39,8 @@ module.exports.routes = {
   'POST /user/:id/upload-certificate':'UserController.uploadCertificate',
   'POST /user/:id/save-certificate':'UserController.saveCertificate',
   'GET /user/test/':'UserController.test',
-  'GET /user/:id/certificates':'UserController.getCertificates'
+  'GET /user/:id/certificates':'UserController.getCertificates',
+  'POST /user/:id/leave':'UserController.leave',
 
 
   /***************************************************************************

@@ -6,47 +6,60 @@ import {UserService} from './user.service'
 @Injectable()
 export class CertificateService{
 
-    certificate:Certificate[];
-    private _certificates$: Subject<Certificate[]>;
+    private _certificates:Certificate[];
+    private certificates$: Subject<Certificate[]> = new BehaviorSubject<Certificate[]>(this._certificates);
 
     userId: number;
     certificateRoom = "certificate";
     constructor(private userService: UserService){
-        this._certificates$ = <Subject<Certificate[]>> new Subject();
-        this.userService.currentUser$
+        this.userService.currentUser
             .subscribe(
                 (user:User)=>{
+                    console.log("Nuevo usuario");
                     this.userId = user.id;
+                    this.getCertificates();
+                    this.registerListener();
                 }
             )
-        this.getCertificates();
-        this.registerListener();
+        
     }
 
     getCertificates():void{
         let token = localStorage.getItem('token');
         let service = this;
         self["io"].socket.get('/user/'+this.userId+'/certificates?token='+token,function(resData:any){
-            console.log(resData);
-            service._certificates$.next(resData);
+            service._certificates = resData;
+            console.log(service._certificates);
+            service.updateObserver();
         });
     }
 
-    
-    
+    updateObserver():void{
+      this.certificates$.next(this._certificates);
+    }
+
 
     get certificates(){
-        return this._certificates$.asObservable();
+        return this.certificates$.asObservable();
     }
 
     registerListener():void{
-        let room = this.certificateRoom + this.userId;
-        console.log(room);
-        self["io"].socket.on("certificate",function(data:any){
-            console.log(data);
+        let service = this;
+        self["io"].socket.on("certificate",function(msg:any){
+            switch (msg.verb) {
+              case "created":
+                service._certificates.push(<Certificate> msg.data);
+                service.updateObserver();
+                break;
+
+              default:
+                // code...
+                break;
+            }
+            console.log(msg);
         })
     }
 
-     
-    
+
+
 }

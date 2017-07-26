@@ -62,10 +62,14 @@ export class AuthService {
     }
 
     logout(){
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.setLoggedIn(false);
-        this.router.navigate(['/pages/login']);
+            this.userService.leave();
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            this.setLoggedIn(false);
+
+            this.router.navigate(['/pages/login']);
+
+        
     }
 
     setLoggedIn(value: boolean){

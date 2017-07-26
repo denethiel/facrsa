@@ -77,10 +77,22 @@ module.exports = {
     sails.log.warn(cert);
 
   },
+  leave:function(req,res){
+    let ownerId = req.param('id');
+    sails.sockets.leave(req, certificateRoom+ownerId,function(err){
+      if(err){return res.serverError(err);}
+      sails.log.warn(certificateRoom+ownerId);
+      sails.log("desconectado")
+      return res.json({message:true})
+    });
+  }
+  ,
   getCertificates:function(req,res){
     let ownerId = req.param('id');
+
     sails.log.warn("GetCertificates")
     sails.log(sails.sockets.getId(req));
+    sails.log.warn(ownerId);
     Certificate.find({owner: ownerId}).then(function(certificates){
       sails.sockets.join(req,certificateRoom+ownerId,function(err){
         if(err){return res.serverError(err);}
