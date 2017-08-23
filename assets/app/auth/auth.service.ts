@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSUbject';
 import { tokenNotExpired } from 'angular2-jwt';
@@ -16,7 +16,7 @@ export class AuthService {
     loggedIn: boolean;
     loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-    constructor(private router: Router, private _http: Http, private userService: UserService){
+    constructor(private router: Router, private _http: Http, private userService: UserService, private zone:NgZone){
         if(this.authenticated){
             this.setLoggedIn(true);
             this.userService.setCurrentUser(<User>JSON.parse(localStorage.getItem('user')))
@@ -66,8 +66,11 @@ export class AuthService {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             this.setLoggedIn(false);
-
             this.router.navigate(['/pages/login']);
+            this.zone.runOutsideAngular(() =>{
+                location.reload();
+            })
+        
 
         
     }

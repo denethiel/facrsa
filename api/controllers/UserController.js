@@ -89,7 +89,6 @@ module.exports = {
   ,
   getCertificates:function(req,res){
     let ownerId = req.param('id');
-
     sails.log.warn("GetCertificates")
     sails.log(sails.sockets.getId(req));
     sails.log.warn(ownerId);
@@ -119,6 +118,17 @@ module.exports = {
       }
       sails.sockets.broadcast(certificateRoom+ownerId,"certificate",msg);
       res.ok();
+    })
+  },
+  deleteCertificate:function(req,res){
+    let ownerId = req.param('id');
+    Certificate.destroy({id:req.body.id}).exec(function(err){
+      if(err){return res.serverError(err);}
+      let msg = {
+        verb:'destroy',
+        data:req.body
+      }
+      sails.sockets.broadcast(certificateRoom+ownerId,"certificate",msg);
     })
   }
   ,

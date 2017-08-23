@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-module.exports = {
+{
 
   schema: true,
 
@@ -19,6 +19,7 @@ module.exports = {
     },
     num_int:{
       type:'string',
+      allowNull:true,
     },
     colony:{
       type:'string'
@@ -27,7 +28,8 @@ module.exports = {
       type:'integer'
     },
     location:{
-      type:'string'
+      type:'string',
+      allowNull:true,
     },
     city:{
       type:'string',
@@ -42,9 +44,10 @@ module.exports = {
       required:true
     },
     reference:{
-      type:'string'
+      type:'string',
+      allowNull:true,
     }
 
   }
-};
+}
 

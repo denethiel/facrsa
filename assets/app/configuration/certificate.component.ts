@@ -13,12 +13,9 @@ export class CertificateComponent implements OnInit{
     constructor(private cerService: CertificateService) {}
 
     haveItems():boolean{
-        console.log(this.certificates);
       if(this.certificates != undefined && this.certificates.length != 0){
-        console.log("Contiene Items");
         return true;
       }else{
-        console.log("No tiene items");
         return false;
       }
     }
@@ -28,7 +25,6 @@ export class CertificateComponent implements OnInit{
         .subscribe(
             (certificates:Certificate[])=>{
                 this.certificates = certificates;
-                console.log(this.certificates);
             }
         )
     }

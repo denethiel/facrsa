@@ -36,6 +36,9 @@ module.exports = {
     }).catch((err) => next(err));
     }).catch((err) => next(err));
 
+  },
+  beforeDestroy:function(values, next){
+    sails.log(values);
   }
 };
 

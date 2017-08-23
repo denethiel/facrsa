@@ -60,6 +60,13 @@ export class UserService {
       })
     }
 
+    public deleteCertificate(data:any):void{
+      this.http.delete('/user/',JSON.stringify(data))
+        .subscribe(response =>{
+          console.log(response.json())
+        })
+    }
+
     public uploadCertificate(file:File):Promise<string>{
       let uploadFile = new FileUploader(file, '/user/'+this._currentUser.id+'/upload-certificate');
       return new Promise((resolve, reject) => {

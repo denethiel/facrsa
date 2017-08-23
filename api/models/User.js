@@ -34,28 +34,26 @@ module.exports = {
       type:'integer'
     },
     fax:{
-      type:'string'
+      type:'string',
+      allowNull:true,
     },
     web:{
-      type:'string'
+      type:'string',
+      allowNull:true
     },
     gln:{
-      type:'string'
+      type:'string',
+      allowNull:true
     },
     admin:
     {
-      type:'boolean'
+      type:'boolean',
+      defaultsTo:false
     },
     certificates:{
       collection:'certificate',
       via:'owner'
-    },
-    toJSON: function(){
-      var obj = this.toObject();
-      delete obj.encryptedPassword;
-      return obj;
     }
-
   },
   beforeCreate: function(values, next){
     bcrypt.genSalt(10, function(err, salt){
@@ -77,6 +75,9 @@ module.exports = {
       }
     })
   },
+  customToJSON:function(){
+    return _.omit(this,['encryptedPassword']);
+  },
   updateAddress:function(parameters,addressId, cb){
     Address.update({id:addressId},{
         street: parameters.street,
@@ -89,7 +90,7 @@ module.exports = {
         state: parameters.state,
         country: parameters.country,
         reference: parameters.reference
-      }).exec(function(err, address){
+      }).exec(function(err){
         if(err){cb(err)}
         User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
           cb(null, user);
@@ -111,7 +112,8 @@ module.exports = {
         reference: parameters.reference
         }).exec(function(err, address){
           if(address){
-            User.update({id: parameters.id},{address: address.id}).exec(function(err, updated){
+            User.addToCollection(parameters.id,'address').members([address.id]).exec(function(err){
+              if(err){cb(err)}
               User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
                 cb(null, user);
               })
