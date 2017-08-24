@@ -3,13 +3,14 @@ import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
 import 'rxjs/add/operator/filter';
 
+
 @Component({
     selector:'app-dashboard',
-    templateUrl:'app/layouts/full-layout.component.html'
+    templateUrl:require('./full-layout.component.html')
 })
 export class FullLayoutComponent implements OnInit {
     title: string;
-    constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService) { 
+    constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService) {
         //this.title = route.snapshot.data.title;
     }
     ngOnInit() : void {

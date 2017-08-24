@@ -9,7 +9,7 @@ import {ValidationService} from './validation.service';
 import {AuthService} from '../auth/auth.service';
 
 @Component({
-    templateUrl:'app/pages/login.component.html'
+    templateUrl:'./login.component.html'
 })
 export class LoginComponent implements OnInit{
 

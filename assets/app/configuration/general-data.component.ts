@@ -9,7 +9,7 @@ import {User, Address} from '../shared/models';
 
 @Component({
     selector:'general-data',
-    templateUrl:'app/configuration/general-data.component.html'
+    templateUrl:'./general-data.component.html'
 })
 export class GeneralDataComponent implements OnInit {
 

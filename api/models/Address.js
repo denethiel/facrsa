@@ -5,10 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-{
-
-  schema: true,
-
+module.exports = {
   attributes: {
     street:{
       type:'string',
@@ -47,7 +44,6 @@
       type:'string',
       allowNull:true,
     }
-
   }
 }
 

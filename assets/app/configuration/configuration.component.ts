@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
-    templateUrl: 'app/configuration/configuration.component.html'
+    templateUrl: './configuration.component.html'
 })
 export class ConfigurationComponent implements OnInit {
     company:boolean = false;

@@ -4,7 +4,7 @@ import {Certificate }from '../shared/models';
 
 @Component({
     selector:'certificate',
-    templateUrl:'app/configuration/certificate.component.html'
+    templateUrl:'./certificate.component.html'
 })
 export class CertificateComponent implements OnInit{
 

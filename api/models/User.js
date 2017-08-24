@@ -10,8 +10,6 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
-  schema: true,
-
   attributes: {
     email:{
       type:'email',

@@ -10,7 +10,7 @@ import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
   selector:'install-certificate',
-  templateUrl:'app/configuration/install-certificate.component.html'
+  templateUrl:'./install-certificate.component.html'
 })
 export class InstallCertificateComponent implements OnInit {
 

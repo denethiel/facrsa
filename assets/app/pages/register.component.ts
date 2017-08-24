@@ -52,7 +52,7 @@ export class ErrorMessages {
     }
 }
 @Component({
-    templateUrl:'app/pages/register.component.html'
+    templateUrl:'./register.component.html'
 })
 export class RegisterComponent{
 
