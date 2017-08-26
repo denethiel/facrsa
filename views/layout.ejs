@@ -28,21 +28,13 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
-    <!--STYLES-->
-    <link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/styles/importer.css">
-    <!--STYLES END-->
 
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
     <script>
     /**
      * System configuration for Angular 2 samples
      * Adjust as necessary for your application needs.
-     */
+
     (function(global) {
       // map tells the System loader where to look for things
       var map = {
@@ -153,7 +145,10 @@
     -->
 
     <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/pollyfills.bundle.js"></script>
+    <script src="/js/homepage.bundle.js"></script>
+    <script src="/js/vendor.bundle.js"></script>
+    <script src="/js/app.bundle.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

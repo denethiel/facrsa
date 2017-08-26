@@ -15,8 +15,7 @@ module.exports = {
       type:'string'
     },
     address:{
-      model:'address',
-      unique:true
+      model:'address'
     }
   }
 };

@@ -27,6 +27,7 @@ module.exports.webpack = {
   *                                                                          *
   ***************************************************************************/
   entry: {
+    'homepage':'./assets/js/homepage.js',
     'pollyfills':'./assets/app/polyfills.ts',
     'vendor':'./assets/app/vendor.ts',
     'app':'./assets/app/main.ts'

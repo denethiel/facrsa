@@ -13,11 +13,9 @@ module.exports = {
     },
     certificate:{
       model:'certificate',
-      unique:true
     },
     address:{
       model:'address',
-      unique:true
     }
   }
 };
