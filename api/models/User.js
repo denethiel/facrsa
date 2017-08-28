@@ -30,7 +30,7 @@ module.exports = {
       model:'address'
     },
     telephone:{
-      type:'integer'
+      type:'number'
     },
     fax:{
       type:'string',

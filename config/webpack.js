@@ -27,14 +27,14 @@ module.exports.webpack = {
   *                                                                          *
   ***************************************************************************/
   entry: {
-    'homepage':'./assets/js/homepage.js',
     'pollyfills':'./assets/app/polyfills.ts',
+    'homepage':'./assets/js/homepage.js',
     'vendor':'./assets/app/vendor.ts',
     'app':'./assets/app/main.ts'
   },
 
   resolve:{
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js','.json','.css','.less','html']
   },
 
 
@@ -64,12 +64,12 @@ module.exports.webpack = {
         {
           loader:'awesome-typescript-loader',
           options:{configFileName:path.resolve(__dirname,'../assets/tsconfig.json')}
-        }, 'angular2-template-loader'
+        },'angular2-template-loader','angular-router-loader','@angularclass/hmr-loader'
         ]
       },
       {
-        test:/\.html$/,
-        loader: 'raw-loader'
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=100000'
       },
       // Extract less files
       {
@@ -80,6 +80,10 @@ module.exports.webpack = {
       {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({ use: 'css-loader!less-loader' })
+      },
+      {
+        test:/\.html$/,
+        loader:'raw-loader', exclude:path.resolve(__dirname,'..','.tmp','public')
       }
     ],
   },

@@ -43,6 +43,14 @@ module.exports.routes = {
   'GET /user/:id/certificates':'UserController.getCertificates',
   'POST /user/:id/leave':'UserController.leave',
 
+    /***************************************************************************
+  *                                                                          *
+  * Auth Routes                                                              *
+  *                                                                          *
+  ***************************************************************************/
+
+  'POST /auth/authenticate':'AuthController.authenticate',
+  'POST /auth/register':'AuthController.register',
 
   /***************************************************************************
   *                                                                          *

@@ -1,3 +1,4 @@
+require('../styles/bootstrap.min.css');
 require('../styles/importer.less');
 
 // Require the sockets.js file if you want to be able to use the socket client to

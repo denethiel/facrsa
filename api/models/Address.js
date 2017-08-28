@@ -22,7 +22,7 @@ module.exports = {
       type:'string'
     },
     postal_code:{
-      type:'integer'
+      type:'number'
     },
     location:{
       type:'string',

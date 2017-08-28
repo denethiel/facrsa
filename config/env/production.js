@@ -35,4 +35,36 @@ module.exports = {
   //   level: "silent"
   // }
 
+   webpack: {
+    plugins: [
+
+      // This plugin extracts CSS that was imported into .js files, and bundles
+      // it into separate .css files.  The filename is based on the name of the
+      // .js file that the CSS was imported into.
+      new ExtractTextPlugin('styles/[name].bundle.css'),
+
+      // This plugin cleans out your .tmp/public folder before lifting.
+      new CleanWebpackPlugin(['public'], {
+        root: path.resolve(__dirname, '..', '.tmp'),
+        verbose: true,
+        dry: false
+      }),
+
+      // This plugin copies the `images` and `fonts` folders into
+      // the .tmp/public folder.  You can add any other static asset
+      // folders to this list and they'll be copied as well.
+      new CopyWebpackPlugin([
+        {
+          from: './assets/images',
+          to: path.resolve(__dirname, '..', '.tmp', 'public', 'images')
+        },
+        {
+          from: './assets/fonts',
+          to: path.resolve(__dirname, '..', '.tmp', 'public', 'fonts')
+        }
+      ]),
+
+      new webpack.optimize.UglifyJsPlugin()
+    ]
+  }
 };

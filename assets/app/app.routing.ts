@@ -23,12 +23,12 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: './app/dashboard/dashboard.module#DashboardModule',
+                loadChildren: './dashboard/dashboard.module#DashboardModule',
                 canActivate:[AuthGuard]
             },
             {
                 path:'configuration',
-                loadChildren:'./app/configuration/configuration.module#ConfigurationModule',
+                loadChildren:'./configuration/configuration.module#ConfigurationModule',
                 canActivate:[AuthGuard]
             },
         ]
@@ -42,7 +42,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren:'./app/pages/pages.module#PagesModule',
+                loadChildren:'./pages/pages.module#PagesModule',
             }
         ]
     },

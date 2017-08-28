@@ -6,7 +6,7 @@ import 'rxjs/add/operator/filter';
 
 @Component({
     selector:'app-dashboard',
-    templateUrl:require('./full-layout.component.html')
+    templateUrl:'./full-layout.component.html'
 })
 export class FullLayoutComponent implements OnInit {
     title: string;

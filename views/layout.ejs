@@ -5,6 +5,13 @@
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/homepage.bundle.css">
 
 
     <!--
@@ -28,67 +35,6 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
-
-
-    <script>
-    /**
-     * System configuration for Angular 2 samples
-     * Adjust as necessary for your application needs.
-
-    (function(global) {
-      // map tells the System loader where to look for things
-      var map = {
-        'app':                        'app', // 'dist',
-        '@angular':                   'node_modules/@angular',
-        'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-        'rxjs':                       'node_modules/rxjs',
-        'moment': 'node_modules/moment',
-        'ngx-bootstrap':              'node_modules/ngx-bootstrap',
-        'angular2-jwt':               'node_modules/angular2-jwt',
-        'angular2-http-file-upload':  'node_modules/angular2-http-file-upload',
-      };
-      // packages tells the System loader how to load when no filename and/or no extension
-      var packages = {
-        'app':                        { main: 'main.js',  defaultExtension: 'js' },
-        'rxjs':                       { main: 'Rx.js', defaultExtension: 'js' },
-        'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-
-        'ngx-bootstrap':              { format: 'cjs', main: 'bundles/ngx-bootstrap.umd.js', defaultExtension: 'js' },
-        'moment':                     { main: 'moment.js', defaultExtension: 'js' },
-        'angular2-jwt':               { main: 'angular2-jwt.js', defaultExtension: 'js'},
-        'angular2-http-file-upload':  { main: 'index.js', defaultExtension:'js'},
-      };
-      var ngPackageNames = [
-        'common',
-        'compiler',
-        'core',
-        'forms',
-        'http',
-        'platform-browser',
-        'platform-browser-dynamic',
-        'router',
-        'upgrade',
-      ];
-      // Individual files (~300 requests):
-      function packIndex(pkgName) {
-        packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
-      }
-      // Bundled (~40 requests):
-      function packUmd(pkgName) {
-        packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
-      }
-      // Most environments should use UMD; some (Karma) need the individual index files
-      var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
-      // Add package entries for angular packages
-      ngPackageNames.forEach(setPackageConfig);
-      var config = {
-        map: map,
-        packages: packages
-      };
-      System.config(config);
-      System.import('app').catch(function(err){ console.error(err); });
-    })(this);
-    </script>
   </head>
 
   <body class="fixed-left">
