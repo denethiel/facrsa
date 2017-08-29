@@ -3,6 +3,8 @@ import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import {User, Certificate }from './models';
 import {UserService} from './user.service'
 
+let io : any;
+
 @Injectable()
 export class CertificateService{
 
@@ -21,13 +23,13 @@ export class CertificateService{
                     this.registerListener();
                 }
             )
-        
+
     }
 
     getCertificates():void{
         let token = localStorage.getItem('token');
         let service = this;
-        self["io"].socket.get('/user/'+this.userId+'/certificates?token='+token,function(resData:any){
+        io.socket.get('/user/'+this.userId+'/certificates?token='+token,function(resData:any){
             service._certificates = resData;
             console.log(service._certificates);
             service.updateObserver();
@@ -46,7 +48,7 @@ export class CertificateService{
 
     registerListener():void{
         let service = this;
-        self["io"].socket.on("certificate",function(msg:any){
+        io.socket.on("certificate",function(msg:any){
             switch (msg.verb) {
               case "created":
                 service._certificates.push(<Certificate> msg.data);

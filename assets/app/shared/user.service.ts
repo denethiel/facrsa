@@ -6,6 +6,8 @@ import {Http, Headers, RequestOptionsArgs} from '@angular/http'
 import {Uploader} from 'angular2-http-file-upload'
 import {FileUploader} from './file-uploader'
 
+let io : any;
+
 @Injectable()
 export class UserService {
 
@@ -19,7 +21,7 @@ export class UserService {
     public setCurrentUser(newUser: User):void{
         this._currentUser = newUser;
         this.currentUser$.next(this._currentUser);
-        
+
         //console.log(this.currentUser);
     }
 
@@ -42,18 +44,18 @@ export class UserService {
     public leave():Promise<any>{
       let token = localStorage.getItem('token');
       return new Promise((resolve, reject) =>{
-        self["io"].socket.post('/user/'+this._currentUser.id+'/leave?token='+token,function(response:any){
+        io.socket.post('/user/'+this._currentUser.id+'/leave?token='+token,function(response:any){
         resolve(response);
         })
       })
-      
+
     }
 
     public saveCertificate(data:any):Promise<Object>{
       let token = localStorage.getItem('token');
       return new Promise((resolve, reject) =>{
         console.log(this._currentUser)
-        self["io"].socket.post('/user/'+this._currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
+        io.socket.post('/user/'+this._currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
           console.log();
           resolve(response)
         })

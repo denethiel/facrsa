@@ -5,6 +5,7 @@
  * @docs        :: https://sailsjs.com/docs/concepts/extending-sails/hooks
  */
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = function defineWebpackHook(sails) {
 
@@ -26,6 +27,7 @@ module.exports = function defineWebpackHook(sails) {
       //otherwise, create a compiler so that we can watch files
       var compiler = webpack(sails.config.webpack);
 
+      /*
       var watcher = compiler.watch({
         // Wait a bit after a change is detected before recompiling,
         // in case other changes come in.
@@ -49,10 +51,35 @@ module.exports = function defineWebpackHook(sails) {
           sails.log.verbose(stats.toString());
         }
       });
+      */
+
+      if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        const WebpackDevServer = require('webpack-dev-server');
+        const server = new WebpackDevServer(compiler,{
+          contentBase:path.resolve(__dirname,'../.tmp/public'),
+          port:3000,
+          historyApiFallback: true,
+          hot: true,
+          open: true,
+          proxy:{
+            '*':{
+              target:'http://localhost:1337'
+            }
+          },
+          stats: {
+            colors: true
+          },
+          watchContentBase: true
+        });
+
+        server.listen(3000, '127.0.0.1', () => {
+          sails.log('Starting server on http://localhost:3000')
+        })
+      }
 
       //when Sails lowers, stop watching files.
       sails.on('lower',function(){
-        watcher && watcher.close();
+        //watcher && watcher.close();
       })
 
       // Be sure and call `done()` when finished!

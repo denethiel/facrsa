@@ -17,12 +17,13 @@ module.exports = {
                         fax: req.body.fax,
                         web: req.body.web,
                         gln: req.body.gln
-                    }).exec(function (err, userUpdated){
+                    }).meta({fetch: true})
+                      .exec(function (err, userUpdated){
                         if(err){
                             res.serverError(err);
                         }
                         sails.log(userUpdated);
-                        if(userUpdated.address && userUpdated.address != '') {
+                        if(userUpdated.address && userUpdated.address != null) {
                           sails.log("Usuario tiene direccion")
                           User.updateAddress(req.body, userUpdated.address ,function(err, user){
                             if(err){

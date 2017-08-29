@@ -17,7 +17,7 @@ module.exports = {
       required:true,
       unique:true
     },
-    encryptedPassword:{
+    password:{
       type:'string'
     },
     rfc:{
@@ -59,13 +59,13 @@ module.exports = {
       if(err) return next(err);
       bcrypt.hash(values.password,salt,function(err, hash){
         if(err) return next(err);
-        values.encryptedPassword = hash;
+        values.password = hash;
         next();
       })
     })
   },
   validPassword: function(password, user, cb){
-    bcrypt.compare(password, user.encryptedPassword, function(err, match){
+    bcrypt.compare(password, user.password, function(err, match){
       if(err) cb(err);
       if(match){
         cb(null,true);
@@ -75,7 +75,7 @@ module.exports = {
     })
   },
   customToJSON:function(){
-    return _.omit(this,['encryptedPassword']);
+    return _.omit(this,['password']);
   },
   updateAddress:function(parameters,addressId, cb){
     Address.update({id:addressId},{
