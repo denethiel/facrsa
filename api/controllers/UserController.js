@@ -72,11 +72,6 @@ module.exports = {
 
     });
   },
-  test:function(req, res){
-    var cert = x509.parseCert(__dirname+'/Test.cer');
-    sails.log.warn(cert);
-
-  },
   leave:function(req,res){
     let ownerId = req.param('id');
     sails.sockets.leave(req, certificateRoom+ownerId,function(err){

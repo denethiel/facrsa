@@ -8,7 +8,7 @@ fs = require('fs');
 module.exports = {
 
   upload:function(req, res){
-    User.findOne(req.param('id')).exec((err, user) => {
+    User.findOne(req.param('userId')).exec((err, user) => {
       res.setTimeout(0);
       if(!req.file('file')._files[0]){
         sails.log.warn('No file Uploaded');
@@ -24,6 +24,46 @@ module.exports = {
         })
       })
     });
+  },
+  get:function(req, res){
+    let ownerId = req.param('userId');
+    Certificate.find({owner: ownerId}).exec(function(err, certificates){
+      if(err){res.serverError(err);}
+      sails.sockets.join(req, ownerId, function(err){
+        if(err){return res.serverError(err);}
+        return res.json(certificates);
+      });
+    })
+  },
+  save:function(req, res){
+    let ownerId = req.param('userId');
+    Certificate.create({
+      cer_file: req.body.cerFile,
+      key_file: req.body.keyFile,
+      password: req.body.password,
+      owner: ownerId
+    }).meta({fetch:true})
+      .exec(function(err, certificate){
+        if(err){return res.serverError(err);}
+        let msg = {
+          verb: 'created',
+          data: certificate
+        }
+        sails.sockets.broadcast(ownerId,"certificate",msg);
+        res.ok();
+      })
+  },
+  delete:function(req, res){
+    let ownerId = req.param('userId');
+    Certificate.destroy({id:req.body.id}).meta({fetch:true}).exec(function(err, deletedCertificate){
+      if(err){return res.serverError(err);}
+      let msg = {
+        verb: 'destroy',
+        data: deletedCertificate
+      }
+      sails.sockets.broadcast(ownerId,"certificate", msg);
+      res.ok();
+    })
   }
 };
 
