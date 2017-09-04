@@ -6,7 +6,6 @@ import {Http, Headers, RequestOptionsArgs} from '@angular/http'
 import {Uploader} from 'angular2-http-file-upload'
 import {FileUploader} from './file-uploader'
 
-let io : any;
 
 @Injectable()
 export class UserService {
@@ -41,52 +40,6 @@ export class UserService {
       );
     }
 
-    public leave():Promise<any>{
-      let token = localStorage.getItem('token');
-      return new Promise((resolve, reject) =>{
-        io.socket.post('/user/'+this._currentUser.id+'/leave?token='+token,function(response:any){
-        resolve(response);
-        })
-      })
-
-    }
-
-    public saveCertificate(data:any):Promise<Object>{
-      let token = localStorage.getItem('token');
-      return new Promise((resolve, reject) =>{
-        console.log(this._currentUser)
-        io.socket.post('/user/'+this._currentUser.id+'/save-certificate?token='+token,data,function(response:any) {
-          console.log();
-          resolve(response)
-        })
-      })
-    }
-
-    public deleteCertificate(data:any):void{
-      this.http.delete('/user/',JSON.stringify(data))
-        .subscribe(response =>{
-          console.log(response.json())
-        })
-    }
-
-    public uploadCertificate(file:File):Promise<string>{
-      let uploadFile = new FileUploader(file, '/user/'+this._currentUser.id+'/upload-certificate');
-      return new Promise((resolve, reject) => {
-        this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
-            console.log("Subido")
-            resolve(response.filename);
-        };
-        this.uploaderService.onErrorUpload = (item, response, status, headers) => {
-             console.log("Error")
-             reject(response.message);
-        };
-        this.uploaderService.upload(uploadFile);
-        this.uploaderService.onProgressUpload = (item, percentComplete) => {
-        console.log(percentComplete);
-      }
-      })
-
-    }
     /*
     public uploadCertificate(data:any):Promise<string>{
       console.log(data);

@@ -62,7 +62,7 @@ export class AuthService {
     }
 
     logout(){
-            this.userService.leave();
+            //this.userService.leave();
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             this.setLoggedIn(false);
@@ -70,9 +70,9 @@ export class AuthService {
             this.zone.runOutsideAngular(() =>{
                 location.reload();
             })
-        
 
-        
+
+
     }
 
     setLoggedIn(value: boolean){

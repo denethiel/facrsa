@@ -5,7 +5,7 @@ import { FormBuilder,
          AbstractControl } from '@angular/forms';
  import { NgForm } from '@angular/forms';
 
-import {UserService} from '../shared/user.service';
+import {CertificateService} from '../shared/certificate.service';
 import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
@@ -19,7 +19,7 @@ export class InstallCertificateComponent implements OnInit {
 
   @ViewChild('cerModal') public cerModal:ModalDirective;
 
-  constructor(private userService: UserService) {}
+  constructor(private cerService: CertificateService) {}
 
   ngOnInit():void{
   }
@@ -29,14 +29,14 @@ export class InstallCertificateComponent implements OnInit {
     if(cerFiles.files && cerFiles.files[0] && keyFiles.files && keyFiles.files[0]){
       let cerFileToUpload = cerFiles.files[0];
       let keyFilesToUpload = keyFiles.files[0];
-      this.userService.uploadCertificate(cerFileToUpload).then(cerFilename =>{
-        this.userService.uploadCertificate(keyFilesToUpload).then(keyFilename => {
+      this.cerService.uploadFile(cerFileToUpload).then(cerFilename =>{
+        this.cerService.uploadFile(keyFilesToUpload).then(keyFilename => {
           let certificiateData = {
             'cerFile':cerFilename,
             'keyFile':keyFilename,
             'password':value.password
           }
-          this.userService.saveCertificate(certificiateData).then(certificate => {
+          this.cerService.saveCertificate(certificiateData).then(certificate => {
             this.cerModal.hide();
           })
         })
