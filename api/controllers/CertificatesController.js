@@ -28,6 +28,7 @@ module.exports = {
   get:function(req, res){
     let ownerId = req.param('userId');
     Certificate.find({owner: ownerId}).exec(function(err, certificates){
+      sails.log(certificates);
       if(err){res.serverError(err);}
       sails.sockets.join(req, ownerId, function(err){
         if(err){return res.serverError(err);}

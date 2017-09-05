@@ -78,7 +78,7 @@ module.exports = {
     return _.omit(this,['password']);
   },
   updateAddress:function(parameters,addressId, cb){
-    Address.update({id:addressId},{
+    Address.update({id:addressId}).set({
         street: parameters.street,
         num_ext: parameters.num_ext,
         num_int: parameters.num_int,
@@ -109,14 +109,24 @@ module.exports = {
         state: parameters.state,
         country: parameters.country,
         reference: parameters.reference
-        }).exec(function(err, address){
+        }).meta({fetch: true}).exec(function(err, address){
           if(address){
+            User.update({id:parameters.id})
+            .set({address:address.id})
+            .exec(function(err){
+              if(err){cb(err)}
+              User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
+                cb(null, user);
+              })
+
+            })
+            /*
             User.addToCollection(parameters.id,'address').members([address.id]).exec(function(err){
               if(err){cb(err)}
               User.findOne({id: parameters.id}).populate('address').exec(function(err, user){
                 cb(null, user);
               })
-            })
+            }) */
           }else{
             cb(err);
           }

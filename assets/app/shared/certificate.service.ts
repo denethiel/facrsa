@@ -19,8 +19,9 @@ export class CertificateService{
         this.userService.currentUser
             .subscribe(
                 (user:User)=>{
-                    console.log("Nuevo usuario");
+
                     this.userId = user.id;
+                    console.log("Nuevo usuario " + this.userId);
                     this.getCertificates();
                     this.registerListener();
                 }
@@ -32,6 +33,7 @@ export class CertificateService{
         let token = localStorage.getItem('token');
         let service = this;
         self["io"].socket.get('/certificate/'+this.userId+'/get?token='+token,function(resData:any){
+            console.log("getCertificate " + resData);
             service._certificates = resData;
             console.log(service._certificates);
             service.updateObserver();

@@ -21,7 +21,7 @@ export class UserService {
         this._currentUser = newUser;
         this.currentUser$.next(this._currentUser);
 
-        //console.log(this.currentUser);
+        console.log(this.currentUser);
     }
 
     get currentUser(){
