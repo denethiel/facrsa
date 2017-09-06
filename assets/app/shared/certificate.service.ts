@@ -44,7 +44,7 @@ export class CertificateService{
       let token = localStorage.getItem('token');
       return new Promise((resolve, reject) =>{
         self["io"].socket.post('/certificate/'+this.userId+'/save?token='+token,data,function(response:any) {
-          console.log();
+          console.log(response);
           resolve(response)
         })
       })
@@ -54,8 +54,7 @@ export class CertificateService{
       let uploadFile = new FileUploader(file, '/certificate/'+this.userId+'/upload');
       return new Promise((resolve, reject) => {
         this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
-            console.log("Subido")
-            resolve(response.filename);
+            resolve(JSON.parse(response).filename);
         };
         this.uploaderService.onErrorUpload = (item, response, status, headers) => {
              console.log("Error")
@@ -80,9 +79,11 @@ export class CertificateService{
 
     registerListener():void{
         let service = this;
-        self["io"].socket.on(this.userId,function(msg:any){
+        self["io"].socket.on("certificate",function(msg:any){
+            console.log(msg);
             switch (msg.verb) {
               case "created":
+
                 service._certificates.push(<Certificate> msg.data);
                 service.updateObserver();
                 break;

@@ -19,6 +19,7 @@ module.exports = {
         dirname: '../../files/'+user.rfc,
         saveAs: req.file('file').filename,
       }, (err, keyFileUploaded) => {
+        sails.log(keyFileUploaded[0]);
         res.json({
           filename: keyFileUploaded[0].fd
         })
@@ -38,6 +39,7 @@ module.exports = {
   },
   save:function(req, res){
     let ownerId = req.param('userId');
+    sails.log(req.body);
     Certificate.create({
       cer_file: req.body.cerFile,
       key_file: req.body.keyFile,

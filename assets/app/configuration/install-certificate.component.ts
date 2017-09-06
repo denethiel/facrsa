@@ -23,7 +23,7 @@ export class InstallCertificateComponent implements OnInit {
 
   ngOnInit():void{
   }
-  onSubmit(value:any){
+  onSubmit(f:NgForm){
     let cerFiles = this.cerFile.nativeElement;
     let keyFiles = this.keyFile.nativeElement;
     if(cerFiles.files && cerFiles.files[0] && keyFiles.files && keyFiles.files[0]){
@@ -34,19 +34,17 @@ export class InstallCertificateComponent implements OnInit {
           let certificiateData = {
             'cerFile':cerFilename,
             'keyFile':keyFilename,
-            'password':value.password
+            'password':f.value.password
           }
           this.cerService.saveCertificate(certificiateData).then(certificate => {
+            cerFiles.value = '';
+            keyFiles.value = '';
+            f.resetForm();
             this.cerModal.hide();
           })
         })
       })
 
-      let uploadData = {
-        'cerFile':cerFileToUpload,
-        'keyFile':keyFilesToUpload,
-        'password':value.password
-      }
 
       //this.userService.uploadCertificate(uploadData);
     }
