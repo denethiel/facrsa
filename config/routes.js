@@ -52,6 +52,7 @@ module.exports.routes = {
   'POST /certificate/:userId/upload':'CertificateController.upload',
   'GET /certificate/:userId/get':'CertificateController.get',
   'POST /certificate/:userId/save':'CertificateController.save',
+  'DELETE /certificate/:userId/delete':'CertificateController.delete',
 
     /***************************************************************************
   *                                                                          *

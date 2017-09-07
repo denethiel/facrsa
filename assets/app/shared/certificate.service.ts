@@ -4,6 +4,7 @@ import {User, Certificate }from './models';
 import {UserService} from './user.service'
 import {Uploader} from 'angular2-http-file-upload';
 import {FileUploader} from './file-uploader';
+import {Utils} from './utils';
 
 let io : any;
 
@@ -30,7 +31,7 @@ export class CertificateService{
     }
 
     getCertificates():void{
-        let token = localStorage.getItem('token');
+        let token = this.getToken();
         let service = this;
         self["io"].socket.get('/certificate/'+this.userId+'/get?token='+token,function(resData:any){
             console.log("getCertificate " + resData);
@@ -41,13 +42,25 @@ export class CertificateService{
     }
 
     public saveCertificate(data:any):Promise<Object>{
-      let token = localStorage.getItem('token');
+      let token = this.getToken();
       return new Promise((resolve, reject) =>{
         self["io"].socket.post('/certificate/'+this.userId+'/save?token='+token,data,function(response:any) {
           console.log(response);
           resolve(response)
         })
       })
+    }
+
+    private getToken(){
+      return localStorage.getItem('token');
+    }
+
+    public deleteCertificate(certificate:Certificate){
+      let token = this.getToken();
+      let service = this;
+      self["io"].socket.delete('/certificate/'+this.userId+'/delete?token='+token, certificate, function(resData:any){
+        console.log("deletelCertificate"+ resData);
+      });
     }
 
     public uploadFile(file: File):Promise<string>{
@@ -87,6 +100,12 @@ export class CertificateService{
                 service._certificates.push(<Certificate> msg.data);
                 service.updateObserver();
                 break;
+
+              case "destroy":
+                var index = Utils.getIndex(service._certificates, <Certificate>msg.data);
+                console.log(index);
+                service._certificates.splice(index,1);
+                service.updateObserver();
 
               default:
                 // code...

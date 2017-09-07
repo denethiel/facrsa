@@ -25,7 +25,7 @@
                     <td>{{certificate.serial_number}}</td>
                     <td>{{certificate.expiration_date}}</td>
                     <td>
-                        <button class="btn btn-icon btn-danger m-b-5">
+                        <button class="btn btn-icon btn-danger m-b-5" (click)="delete(certificate)">
                             <i class="zmdi zmdi-delete"></i>
                         </button>
                     </td>

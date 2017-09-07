@@ -34,6 +34,9 @@ module.exports.datastores = {
 
   default: {
 
+    adapter: require('sails-mongo'),
+    url:'mongodb://sails:online@iMac-de-Jose.local:27017/sails'
+
     /***************************************************************************
     *                                                                          *
     * Want to use a different database during development?                     *

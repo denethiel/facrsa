@@ -19,7 +19,7 @@ module.exports = {
         dirname: '../../files/'+user.rfc,
         saveAs: req.file('file').filename,
       }, (err, keyFileUploaded) => {
-        sails.log(keyFileUploaded[0]);
+        //sails.log(keyFileUploaded[0]);
         res.json({
           filename: keyFileUploaded[0].fd
         })
@@ -29,7 +29,7 @@ module.exports = {
   get:function(req, res){
     let ownerId = req.param('userId');
     Certificate.find({owner: ownerId}).exec(function(err, certificates){
-      sails.log(certificates);
+      //sails.log(certificates);
       if(err){res.serverError(err);}
       sails.sockets.join(req, ownerId, function(err){
         if(err){return res.serverError(err);}
@@ -57,13 +57,19 @@ module.exports = {
       })
   },
   delete:function(req, res){
+    //sails.log(req.body);
     let ownerId = req.param('userId');
-    Certificate.destroy({id:req.body.id}).meta({fetch:true}).exec(function(err, deletedCertificate){
+    sails.log("Response Delete" + req.body.id);
+    Certificate.destroy({id:req.body.id, owner: req.body.owner}).meta({fetch:true}).exec(function(err, deletedCertificate){
+
+      sails.log(deletedCertificate);
+      sails.log(err);
       if(err){return res.serverError(err);}
       let msg = {
         verb: 'destroy',
         data: deletedCertificate
       }
+
       sails.sockets.broadcast(ownerId,"certificate", msg);
       res.ok();
     })

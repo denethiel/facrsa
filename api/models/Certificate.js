@@ -37,8 +37,13 @@ module.exports = {
     }).catch((err) => next(err));
 
   },
-  beforeDestroy:function(values, next){
-    sails.log(values);
+  afterDestroy:function(destroyRecord, next){
+    sails.log(destroyRecord);
+    certificateUtils.deleteFile(destroyRecord.cer_file).then((msg) => {
+      certificateUtils.deleteFile(destroyRecord.key_file).then((msg) => {
+        next();
+      }).catch((err) => next(err));
+    }).catch((err) => next(err));
   }
 };
 

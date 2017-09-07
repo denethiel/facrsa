@@ -1,5 +1,6 @@
 var shell = require('shelljs');
 var Promise = require('promise');
+var fs = require('fs');
 
 findSerialNumber = function(cerFile){
   var deferred = new Promise(function(resolve, reject){
@@ -41,7 +42,19 @@ findExpirationData = function(cerFile){
   return deferred;
 }
 
+deleteFile = function(pathFile){
+  sails.log(pathFile);
+  var deferred = new Promise(function(resolve, reject){
+    fs.unlink(pathFile, function(err){
+      if(err){reject(err);}
+      resolve("Archivo eliminado correctamente");
+    })
+  })
+  return deferred;
+}
+
 module.exports = {
   findSerialNumber: findSerialNumber,
-  findExpirationData: findExpirationData
+  findExpirationData: findExpirationData,
+  deleteFile: deleteFile
 }

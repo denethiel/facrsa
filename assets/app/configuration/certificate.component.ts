@@ -20,6 +20,11 @@ export class CertificateComponent implements OnInit{
       }
     }
 
+    delete(certificate: Certificate){
+      console.log(certificate);
+      this.cerService.deleteCertificate(certificate);
+    }
+
     ngOnInit():void{
         this.cerService.certificates
         .subscribe(

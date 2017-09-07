@@ -29,6 +29,7 @@
     "sails": "^1.0.0-37",
     "sails-hook-orm": "^2.0.0-16",
     "sails-hook-sockets": "^1.4.0",
+    "sails-mongo": "^1.0.0-9",
     "shelljs": "^0.7.8",
     "zone.js": "^0.8.17"
   },
