@@ -102,10 +102,12 @@ export class CertificateService{
                 break;
 
               case "destroy":
-                var index = Utils.getIndex(service._certificates, <Certificate>msg.data);
-                console.log(index);
+
+                var index = Utils.getIndex(service._certificates, msg.data[0].id);
                 service._certificates.splice(index,1);
+                console.log(service._certificates);
                 service.updateObserver();
+                break;
 
               default:
                 // code...

@@ -21,7 +21,6 @@ export class CertificateComponent implements OnInit{
     }
 
     delete(certificate: Certificate){
-      console.log(certificate);
       this.cerService.deleteCertificate(certificate);
     }
 
