@@ -3,6 +3,8 @@ var Promise = require('promise');
 var fs = require('fs');
 
 findSerialNumber = function(cerFile){
+  console.log("Service findSerialNumber");
+  console.log(cerFile);
   var deferred = new Promise(function(resolve, reject){
     if(cerFile.includes(".cer")){
       var raw = shell.exec('openssl x509 -inform DER -in "'+cerFile+'" -noout -serial',{silent: true}).stdout;

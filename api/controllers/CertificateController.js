@@ -47,6 +47,7 @@ module.exports = {
       owner: ownerId
     }).meta({fetch:true})
       .exec(function(err, certificate){
+
         if(err){return res.serverError(err);}
         let msg = {
           verb: 'created',

@@ -31,7 +31,8 @@
     "sails-hook-sockets": "^1.4.0",
     "sails-mongo": "^1.0.0-9",
     "shelljs": "^0.7.8",
-    "zone.js": "^0.8.17"
+    "zone.js": "^0.8.17",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "angular-router-loader": "^0.6.0",

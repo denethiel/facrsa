@@ -28,6 +28,7 @@ module.exports = {
     }
   },
   beforeCreate: function(values, next){
+    sails.log(values);
     certificateUtils.findSerialNumber(values.cer_file).then((serial_number)=>{
       values.serial_number = serial_number;
       certificateUtils.findExpirationData(values.cer_file).then((expiration_date)=>{

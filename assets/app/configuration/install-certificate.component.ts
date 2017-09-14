@@ -29,6 +29,8 @@ export class InstallCertificateComponent implements OnInit {
     if(cerFiles.files && cerFiles.files[0] && keyFiles.files && keyFiles.files[0]){
       let cerFileToUpload = cerFiles.files[0];
       let keyFilesToUpload = keyFiles.files[0];
+      console.log(cerFileToUpload);
+      console.log(keyFilesToUpload)
       this.cerService.uploadFile(cerFileToUpload).then(cerFilename =>{
         this.cerService.uploadFile(keyFilesToUpload).then(keyFilename => {
           let certificiateData = {

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import {User, Certificate }from './models';
 import {UserService} from './user.service'
@@ -8,15 +8,35 @@ import {Utils} from './utils';
 
 let io : any;
 
+let initialCertificates: Certificate[] = [];
+
+interface ICertificatesOperation extends Function {
+  (certificates: Certificate[]): Certificate[];
+}
+
 @Injectable()
 export class CertificateService{
+    //Yunes; El mismo lastre de Fidel y Duarte
 
-    private _certificates:Certificate[];
-    private certificates$: Subject<Certificate[]> = new BehaviorSubject<Certificate[]>(this._certificates);
+    //Comentario Politico Martin.
+    private _certificates:Certificate[] = [];
+    certificates: Observable<Certificate[]>;
+    updates: Subject<any> = new Subject<any>();
 
     userId: number;
     certificateRoom = "certificate";
     constructor(private userService: UserService, private uploaderService: Uploader){
+
+        this.registerListener();
+
+         this.certificates = this.updates
+         .scan((certificates:Certificate[],
+             operation: ICertificatesOperation) => {
+           return operation(certificates);
+         })
+         .publishReplay(1)
+         .refCount();
+
         this.userService.currentUser
             .subscribe(
                 (user:User)=>{
@@ -24,10 +44,14 @@ export class CertificateService{
                     this.userId = user.id;
                     console.log("Nuevo usuario " + this.userId);
                     this.getCertificates();
-                    this.registerListener();
+                    //this.registerListener();
                 }
             )
 
+    }
+
+    get numberOfCertificates(){
+      return this._certificates.length;
     }
 
     getCertificates():void{
@@ -82,13 +106,9 @@ export class CertificateService{
 
 
     updateObserver():void{
-      this.certificates$.next(this._certificates);
+      this.updates.next(this._certificates);
     }
 
-
-    get certificates(){
-        return this.certificates$.asObservable();
-    }
 
     registerListener():void{
         let service = this;
@@ -113,7 +133,6 @@ export class CertificateService{
                 // code...
                 break;
             }
-            console.log(msg);
         })
     }
 

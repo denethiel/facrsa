@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr role="row" *ngFor="let certificate of certificates">
+                <tr role="row" *ngFor="let certificate of certificates | async">
                     <td>{{certificate.serial_number}}</td>
                     <td>{{certificate.expiration_date}}</td>
                     <td>
@@ -33,5 +33,4 @@
             </tbody>
         </table>
     </div>
-    <div>{{certificates}}</div>
 </div>
