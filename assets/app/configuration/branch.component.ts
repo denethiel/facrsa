@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validator, AbstractControl} from '@angular/forms';
 import {MessagesService} from '../shared/messages.service';
 import {Observable} from 'rxjs';
@@ -6,14 +6,17 @@ import {Thread, Message} from '../shared/models'
 
 @Component({
   selector:'branch',
-  templateUrl:'./branch.component.html'
+  templateUrl:'./branch.component.html',
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class BranchComponent implements OnInit {
 
   messages : Observable<any>;
   draftMessage:Message;
-  constructor(private messagesService: MessagesService) {
+  @Output() close = new EventEmitter<void>();
+  constructor(private messagesService: MessagesService, private chRef : ChangeDetectorRef) {
     this.messages = messagesService.messages;
+    //chRef.detectChanges();
   }
 
   ngOnInit():void{
@@ -55,5 +58,6 @@ export class BranchComponent implements OnInit {
     m.isRead = true;
     this.messagesService.addMessage(m);
     this.draftMessage = new Message();
+    this.close.emit();
   }
 }

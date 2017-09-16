@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {Subject, Observable} from 'rxjs';
 import {Message, Thread} from './models';
-
+import {SocketService} from './socket.service';
 let initialMessages: Message[] = [];
 
 interface IMessagesOperation extends Function {
@@ -25,7 +25,7 @@ export class MessagesService {
   create: Subject<Message> = new Subject<Message>();
   markThreadAsRead: Subject<any> = new Subject<any>();
 
-  constructor() {
+  constructor(private socket:SocketService, private zone:NgZone) {
     this.registerSocket();
     this.messages = this.updates
       // watch the updates and accumulate operations on the messages
@@ -70,14 +70,13 @@ export class MessagesService {
 
   // an imperative function call to this action stream
   addMessage(message: Message): void {
-    this.newMessages.next(message);
+    this.newMessages.next(message)
   }
 
-  registerSocket():void{
-    let service = this;
-    self["io"].socket.on("certificate",function(msg:any){
-      console.log(msg);
-      switch (msg.verb) {
+  registerSocket(){
+      let service = this;
+      this.socket.on("certificate", function(msg:any){
+         switch (msg.verb) {
         case "created":
           let m :Message = new Message({
             text: msg.data.id
@@ -97,7 +96,9 @@ export class MessagesService {
         default:
           // code...
           break;
-      }
+      } 
+ 
+      
   })
   }
 

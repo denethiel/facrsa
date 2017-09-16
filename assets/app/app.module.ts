@@ -11,6 +11,7 @@ import {UserService} from './shared/user.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import {CertificateService} from './shared/certificate.service';
 import { MessagesService} from './shared/messages.service';
+import { SocketService } from './shared/socket.service';
 
 import { AppComponent }   from './app.component';
 import { ModalModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -60,6 +61,7 @@ import {Uploader} from 'angular2-http-file-upload';
     UserService,
     CertificateService,
     MessagesService,
+    SocketService,
     Uploader,
     AuthGuard],
     bootstrap:    [AppComponent],

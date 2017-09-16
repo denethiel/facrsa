@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {ConfigurationComponent} from './configuration.component';
+import {BranchComponent} from './branch.component'
 
 const routes: Routes = [
     {
@@ -16,6 +17,9 @@ const routes: Routes = [
                 
             }
         ]
+    },{
+        path:'test',
+        component: BranchComponent
     }
 ];
 

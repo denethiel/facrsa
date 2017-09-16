@@ -5,8 +5,8 @@ import {UserService} from './user.service'
 import {Uploader} from 'angular2-http-file-upload';
 import {FileUploader} from './file-uploader';
 import {Utils} from './utils';
+import {SocketService} from './socket.service';
 
-let io : any;
 
 let initialCertificates: Certificate[] = [];
 
@@ -16,27 +16,12 @@ interface ICertificatesOperation extends Function {
 
 @Injectable()
 export class CertificateService{
-    //Yunes; El mismo lastre de Fidel y Duarte
-
-    //Comentario Politico Martin.
-    private _certificates:Certificate[] = [];
-    certificates: Observable<Certificate[]>;
-    updates: Subject<any> = new Subject<any>();
+    private _certificates:Certificate[];
+    private certificates$: Subject<Certificate[]> = new BehaviorSubject<Certificate[]>(this._certificates);
 
     userId: number;
     certificateRoom = "certificate";
-    constructor(private userService: UserService, private uploaderService: Uploader){
-
-        this.registerListener();
-
-         this.certificates = this.updates
-         .scan((certificates:Certificate[],
-             operation: ICertificatesOperation) => {
-           return operation(certificates);
-         })
-         .publishReplay(1)
-         .refCount();
-
+    constructor(private userService: UserService, private uploaderService: Uploader, private socket : SocketService){
         this.userService.currentUser
             .subscribe(
                 (user:User)=>{
@@ -44,16 +29,15 @@ export class CertificateService{
                     this.userId = user.id;
                     console.log("Nuevo usuario " + this.userId);
                     this.getCertificates();
-                    //this.registerListener();
+                    this.registerListener();
                 }
             )
 
     }
 
-    get numberOfCertificates(){
-      return this._certificates.length;
+    get certificates(){
+        return this.certificates$.asObservable();
     }
-
     getCertificates():void{
         let token = this.getToken();
         let service = this;
@@ -106,7 +90,7 @@ export class CertificateService{
 
 
     updateObserver():void{
-      this.updates.next(this._certificates);
+      this.certificates$.next(this._certificates);
     }
 
 
