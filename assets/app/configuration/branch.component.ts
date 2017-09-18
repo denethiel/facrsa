@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validator, AbstractControl} from '@angular/forms
 import {MessagesService} from '../shared/messages.service';
 import {Observable} from 'rxjs';
 import {Thread, Message} from '../shared/models'
+import {Impuestos} from '../shared/sat/c_Impuesto';
 
 @Component({
   selector:'branch',
@@ -10,16 +11,21 @@ import {Thread, Message} from '../shared/models'
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class BranchComponent implements OnInit {
-
+  impuestos = Array<any>;
   messages : Observable<any>;
   draftMessage:Message;
   @Output() close = new EventEmitter<void>();
   constructor(private messagesService: MessagesService, private chRef : ChangeDetectorRef) {
     this.messages = messagesService.messages;
+    this.impuestos = Impuestos;
     //chRef.detectChanges();
   }
 
   ngOnInit():void{
+
+    this.impuestos.forEach((impuesto) => {
+      console.log(impuesto.name)
+    })
 
     let thread: Thread = new Thread('t1','Nate','');
 
