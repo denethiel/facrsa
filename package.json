@@ -21,6 +21,7 @@
     "bcrypt": "^1.0.3",
     "es6-shim": "^0.35.3",
     "jsonwebtoken": "^7.4.3",
+    "line-reader": "^0.4.0",
     "lodash": "3.10.1",
     "material-design-icons": "^3.0.1",
     "ngx-bootstrap": "^1.9.1",
@@ -31,8 +32,8 @@
     "sails-hook-sockets": "^1.4.0",
     "sails-mongo": "^1.0.0-9",
     "shelljs": "^0.7.8",
-    "zone.js": "^0.8.17",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "zone.js": "^0.8.17"
   },
   "devDependencies": {
     "angular-router-loader": "^0.6.0",
