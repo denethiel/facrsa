@@ -15,7 +15,13 @@ module.exports.bootstrap = function(cb) {
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   //
-  dataImport.importProdKey().then(() => {
-    return cb();
-  }).catch((err) => {return cb(err)});
+  // dataImport.importProdKey().then((msg) => {
+  //   sails.log(msg);
+  //   return cb();
+  // }).catch((err) => {return cb(err)});
+  //
+  sails.helpers.satData().exec(function(err, msg){
+    sails.log(msg);
+  })
+  return cb();
 };

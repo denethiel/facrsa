@@ -3,6 +3,7 @@
     "grunt":false
   },
   "generators": {
-    "modules": {}
+    "modules": {
+    }
   }
 }
