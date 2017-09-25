@@ -20,8 +20,16 @@ module.exports.bootstrap = function(cb) {
   //   return cb();
   // }).catch((err) => {return cb(err)});
   //
-  sails.helpers.satData().exec(function(err, msg){
+  sails.helpers.importSatData().exec(function(err, msg){
     sails.log(msg);
+    return cb();
   })
-  return cb();
+  //
+  // ClaveProducto.findOne({key:'01010101'}).exec(function(err, num){
+  //     sails.log("Registros Encontrados:" + num);
+  //     return cb();
+  // })
+  //
+  //return cb();
+
 };

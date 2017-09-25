@@ -27,8 +27,10 @@ module.exports = {
 
 
 
+
     ClaveProducto.count({}).exec(function(err, numRecord){
       sails.log("Registros encontrados: " + numRecord);
+      var msg;
       if(numRecord === 0){
         var base = path.resolve('.');
         var file = base + '/api/data/claveProdServ.csv';
@@ -51,12 +53,12 @@ module.exports = {
           }
 
         })
-        exits.success("Complete");
+        msg = "Complete";
       }else{
-        exits.success("Nada que agregar.");
+        msg = "Nada que agregar.";
       }
     })
-    return exits.success();
+    return exits.success(msg);
 
   }
 
